@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package user;
+option go_package = "user";
+
+service user {
+  rpc getUser(getUserReq) returns (getUserReply);
+}
+
+message getUserReq {
+  string username = 1;
+  string password = 2;
+}
+
+message getUserReply {
+  int64 id = 1;
+}

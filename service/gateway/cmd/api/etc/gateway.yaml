@@ -1,0 +1,11 @@
+Name: gateway
+Host: 0.0.0.0
+Port: 8888
+Jwt:
+  AccessSecret: l8qEr9nK2VKszMhQcrADh0MGCI8iOSmb
+  AccessExpired: 86400
+UserRpc:
+  Etcd:
+    Hosts:
+    - 127.0.0.1:2379
+    Key: user.rpc

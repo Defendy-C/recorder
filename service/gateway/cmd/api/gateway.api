@@ -1,0 +1,26 @@
+syntax = "v1"
+
+info(
+	title: "gateway"
+	desc: "expose available services"
+	author: "fenghai"
+	email: "stupidcatdonotcry@gmail.com"
+	version: "v1"
+)
+
+type (
+	LoginReq {
+		Username string `json:"username"`
+		Password string `json:"password"`
+	}
+
+	LoginResp {
+		Token string `json:"token"`
+	}
+)
+
+// user
+service gateway {
+	@handler login
+	post /user/login (LoginReq) returns (LoginResp)
+}
