@@ -1,7 +1,7 @@
 Name: gateway
 Host: 0.0.0.0
 Port: 8888
-Jwt:
+Auth:
   AccessSecret: l8qEr9nK2VKszMhQcrADh0MGCI8iOSmb
   AccessExpired: 86400
 UserRpc:
@@ -9,3 +9,13 @@ UserRpc:
     Hosts:
     - 127.0.0.1:2379
     Key: user.rpc
+VideoRpc:
+  Etcd:
+    Hosts:
+    -127.0.0.1:2379
+    Key: video.rpc
+FileSysRpc:
+  Etcd:
+    Hosts:
+    -127.0.0.1:2379
+    Key: filesys.rpc

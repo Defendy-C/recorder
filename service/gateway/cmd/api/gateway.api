@@ -17,10 +17,29 @@ type (
 	LoginResp {
 		Token string `json:"token"`
 	}
+
+	UploadReq {
+		UserId int    `form:"user_id"`
+		Name   string `form:"name"`
+		Chunks int    `form:"chunks"`
+		Chunk  int    `form:"chunk"`
+	}
+
+	UploadResp {
+		Ok bool `json:"ok"`
+	}
 )
 
-// user
 service gateway {
 	@handler login
 	post /user/login (LoginReq) returns (LoginResp)
+}
+
+// video
+@server(
+	jwt: Auth
+)
+service gateway {
+	@handler upload
+	post /video/upload (UploadReq) returns (UploadResp)
 }

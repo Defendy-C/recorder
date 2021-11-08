@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package filesys;
+
+option go_package = "filesys";
+
+service fileSys {
+  rpc storePartly (storePartlyReq) returns (storePartlyResp);
+}
+
+message storePartlyReq {
+  int64 user_id = 1;
+  string filename = 2;
+  string created_at = 3;
+  bytes data = 4;
+  int64 chunk = 5;
+  int64 chunks = 6;
+}
+
+message storePartlyResp {
+  string path = 1;
+  bool is_finished = 2;
+}
+
+
+

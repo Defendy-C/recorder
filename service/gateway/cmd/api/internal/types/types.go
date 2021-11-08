@@ -9,3 +9,14 @@ type LoginReq struct {
 type LoginResp struct {
 	Token string `json:"token"`
 }
+
+type UploadReq struct {
+	UserId int    `form:"user_id"`
+	Name   string `form:"name"`
+	Chunks int    `form:"chunks"`
+	Chunk  int    `form:"chunk"`
+}
+
+type UploadResp struct {
+	Ok bool `json:"ok"`
+}

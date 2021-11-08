@@ -1,0 +1,13 @@
+Name: video.rpc
+ListenOn: 127.0.0.1:8080
+Mysql:
+  Datasource: root:$password@tcp(127.0.0.1:3306)/recorder?charset=utf8mb4&parseTime=true
+Cache:
+  - Host: 127.0.0.1:6379
+    Type: node
+Etcd:
+  Hosts:
+  - 127.0.0.1:2379
+  Key: video.rpc
+Log:
+  ServiceName: video

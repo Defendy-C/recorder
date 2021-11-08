@@ -7,9 +7,11 @@ import (
 
 type Config struct {
 	rest.RestConf
-	Jwt struct {
+	Auth struct {
 		AccessSecret  string
 		AccessExpired int
 	}
-	UserRpc zrpc.RpcClientConf
+	UserRpc    zrpc.RpcClientConf
+	VideoRpc   zrpc.RpcClientConf
+	FileSysRpc zrpc.RpcClientConf
 }

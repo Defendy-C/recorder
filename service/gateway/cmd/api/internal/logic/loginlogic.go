@@ -40,9 +40,9 @@ func (l *LoginLogic) Login(req types.LoginReq) (*types.LoginResp, error) {
 	// gen token
 	token, err := auth.NewJwtToken(map[string]interface{}{
 		"id": resp.Id,
-		"exp": iat + int64(l.svcCtx.Config.Jwt.AccessExpired),
+		"exp": iat + int64(l.svcCtx.Config.Auth.AccessExpired),
 		"iat": iat,
-	}, []byte(l.svcCtx.Config.Jwt.AccessSecret))
+	}, []byte(l.svcCtx.Config.Auth.AccessSecret))
 	if err != nil {
 		logx.Errorf("get token failed: %v\n", err)
 		return nil, httperror.ErrLoginFailed
