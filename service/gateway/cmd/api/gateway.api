@@ -18,16 +18,33 @@ type (
 		Token string `json:"token"`
 	}
 
+	UploadConnReq {
+		UserId    int    `json:"user_id"`
+		VideoName string `json:"video_name"`
+		Desc      string `json:"desc,optional"`
+		Chunks    int    `json:"chunks"`
+	}
+
+	UploadConnResp {
+		Ok bool `json:"ok"`
+		Id int  `json:"id"`
+	}
+
 	UploadReq {
-		UserId int    `form:"user_id"`
-		Name   string `form:"name"`
-		Chunks int    `form:"chunks"`
-		Chunk  int    `form:"chunk"`
+		Id    int `path:"id"`
+		Chunk int `path:"chunk"`
 	}
 
 	UploadResp {
 		Ok bool `json:"ok"`
 	}
+
+	DownloadReq {
+		Id    int `path:"id"`
+		Chunk int `path:"chunk"`
+	}
+
+	DownloadResp struct{}
 )
 
 service gateway {
@@ -40,6 +57,10 @@ service gateway {
 	jwt: Auth
 )
 service gateway {
+	@handler uploadConn
+	post /video/upload/conn (UploadConnReq) returns (UploadConnResp)
 	@handler upload
-	post /video/upload (UploadReq) returns (UploadResp)
+	post /video/upload/:id/:chunk (UploadReq) returns (UploadResp)
+	@handler download
+	post /video/download/:id/:chunk (DownloadReq)
 }

@@ -24,62 +24,78 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
-type UploadingReq struct {
+type CreateReq struct {
 	UserId               int64    `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	VideoName            string   `protobuf:"bytes,2,opt,name=video_name,json=videoName,proto3" json:"video_name,omitempty"`
-	Path                 string   `protobuf:"bytes,3,opt,name=path,proto3" json:"path,omitempty"`
+	FileId               int64    `protobuf:"varint,2,opt,name=file_id,json=fileId,proto3" json:"file_id,omitempty"`
+	VideoName            string   `protobuf:"bytes,3,opt,name=video_name,json=videoName,proto3" json:"video_name,omitempty"`
+	Desc                 string   `protobuf:"bytes,4,opt,name=desc,proto3" json:"desc,omitempty"`
+	CreatedAt            string   `protobuf:"bytes,5.png,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *UploadingReq) Reset()         { *m = UploadingReq{} }
-func (m *UploadingReq) String() string { return proto.CompactTextString(m) }
-func (*UploadingReq) ProtoMessage()    {}
-func (*UploadingReq) Descriptor() ([]byte, []int) {
+func (m *CreateReq) Reset()         { *m = CreateReq{} }
+func (m *CreateReq) String() string { return proto.CompactTextString(m) }
+func (*CreateReq) ProtoMessage()    {}
+func (*CreateReq) Descriptor() ([]byte, []int) {
 	return fileDescriptor_0ad4ea8866efb1e3, []int{0}
 }
 
-func (m *UploadingReq) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_UploadingReq.Unmarshal(m, b)
+func (m *CreateReq) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CreateReq.Unmarshal(m, b)
 }
-func (m *UploadingReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_UploadingReq.Marshal(b, m, deterministic)
+func (m *CreateReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CreateReq.Marshal(b, m, deterministic)
 }
-func (m *UploadingReq) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_UploadingReq.Merge(m, src)
+func (m *CreateReq) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CreateReq.Merge(m, src)
 }
-func (m *UploadingReq) XXX_Size() int {
-	return xxx_messageInfo_UploadingReq.Size(m)
+func (m *CreateReq) XXX_Size() int {
+	return xxx_messageInfo_CreateReq.Size(m)
 }
-func (m *UploadingReq) XXX_DiscardUnknown() {
-	xxx_messageInfo_UploadingReq.DiscardUnknown(m)
+func (m *CreateReq) XXX_DiscardUnknown() {
+	xxx_messageInfo_CreateReq.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_UploadingReq proto.InternalMessageInfo
+var xxx_messageInfo_CreateReq proto.InternalMessageInfo
 
-func (m *UploadingReq) GetUserId() int64 {
+func (m *CreateReq) GetUserId() int64 {
 	if m != nil {
 		return m.UserId
 	}
 	return 0
 }
 
-func (m *UploadingReq) GetVideoName() string {
+func (m *CreateReq) GetFileId() int64 {
+	if m != nil {
+		return m.FileId
+	}
+	return 0
+}
+
+func (m *CreateReq) GetVideoName() string {
 	if m != nil {
 		return m.VideoName
 	}
 	return ""
 }
 
-func (m *UploadingReq) GetPath() string {
+func (m *CreateReq) GetDesc() string {
 	if m != nil {
-		return m.Path
+		return m.Desc
 	}
 	return ""
 }
 
-type UploadingResp struct {
+func (m *CreateReq) GetCreatedAt() string {
+	if m != nil {
+		return m.CreatedAt
+	}
+	return ""
+}
+
+type CreateResp struct {
 	Ok                   bool     `protobuf:"varint,1,opt,name=ok,proto3" json:"ok,omitempty"`
 	Id                   int64    `protobuf:"varint,2,opt,name=id,proto3" json:"id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
@@ -87,129 +103,43 @@ type UploadingResp struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *UploadingResp) Reset()         { *m = UploadingResp{} }
-func (m *UploadingResp) String() string { return proto.CompactTextString(m) }
-func (*UploadingResp) ProtoMessage()    {}
-func (*UploadingResp) Descriptor() ([]byte, []int) {
+func (m *CreateResp) Reset()         { *m = CreateResp{} }
+func (m *CreateResp) String() string { return proto.CompactTextString(m) }
+func (*CreateResp) ProtoMessage()    {}
+func (*CreateResp) Descriptor() ([]byte, []int) {
 	return fileDescriptor_0ad4ea8866efb1e3, []int{1}
 }
 
-func (m *UploadingResp) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_UploadingResp.Unmarshal(m, b)
+func (m *CreateResp) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CreateResp.Unmarshal(m, b)
 }
-func (m *UploadingResp) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_UploadingResp.Marshal(b, m, deterministic)
+func (m *CreateResp) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CreateResp.Marshal(b, m, deterministic)
 }
-func (m *UploadingResp) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_UploadingResp.Merge(m, src)
+func (m *CreateResp) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CreateResp.Merge(m, src)
 }
-func (m *UploadingResp) XXX_Size() int {
-	return xxx_messageInfo_UploadingResp.Size(m)
+func (m *CreateResp) XXX_Size() int {
+	return xxx_messageInfo_CreateResp.Size(m)
 }
-func (m *UploadingResp) XXX_DiscardUnknown() {
-	xxx_messageInfo_UploadingResp.DiscardUnknown(m)
+func (m *CreateResp) XXX_DiscardUnknown() {
+	xxx_messageInfo_CreateResp.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_UploadingResp proto.InternalMessageInfo
+var xxx_messageInfo_CreateResp proto.InternalMessageInfo
 
-func (m *UploadingResp) GetOk() bool {
+func (m *CreateResp) GetOk() bool {
 	if m != nil {
 		return m.Ok
 	}
 	return false
 }
 
-func (m *UploadingResp) GetId() int64 {
+func (m *CreateResp) GetId() int64 {
 	if m != nil {
 		return m.Id
 	}
 	return 0
-}
-
-type UploadedReq struct {
-	UserId               int64    `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	VideoName            string   `protobuf:"bytes,2,opt,name=video_name,json=videoName,proto3" json:"video_name,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *UploadedReq) Reset()         { *m = UploadedReq{} }
-func (m *UploadedReq) String() string { return proto.CompactTextString(m) }
-func (*UploadedReq) ProtoMessage()    {}
-func (*UploadedReq) Descriptor() ([]byte, []int) {
-	return fileDescriptor_0ad4ea8866efb1e3, []int{2}
-}
-
-func (m *UploadedReq) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_UploadedReq.Unmarshal(m, b)
-}
-func (m *UploadedReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_UploadedReq.Marshal(b, m, deterministic)
-}
-func (m *UploadedReq) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_UploadedReq.Merge(m, src)
-}
-func (m *UploadedReq) XXX_Size() int {
-	return xxx_messageInfo_UploadedReq.Size(m)
-}
-func (m *UploadedReq) XXX_DiscardUnknown() {
-	xxx_messageInfo_UploadedReq.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_UploadedReq proto.InternalMessageInfo
-
-func (m *UploadedReq) GetUserId() int64 {
-	if m != nil {
-		return m.UserId
-	}
-	return 0
-}
-
-func (m *UploadedReq) GetVideoName() string {
-	if m != nil {
-		return m.VideoName
-	}
-	return ""
-}
-
-type UploadedResp struct {
-	Ok                   bool     `protobuf:"varint,1,opt,name=ok,proto3" json:"ok,omitempty"`
-	XXX_NoUnkeyedLiteral struct{} `json:"-"`
-	XXX_unrecognized     []byte   `json:"-"`
-	XXX_sizecache        int32    `json:"-"`
-}
-
-func (m *UploadedResp) Reset()         { *m = UploadedResp{} }
-func (m *UploadedResp) String() string { return proto.CompactTextString(m) }
-func (*UploadedResp) ProtoMessage()    {}
-func (*UploadedResp) Descriptor() ([]byte, []int) {
-	return fileDescriptor_0ad4ea8866efb1e3, []int{3}
-}
-
-func (m *UploadedResp) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_UploadedResp.Unmarshal(m, b)
-}
-func (m *UploadedResp) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_UploadedResp.Marshal(b, m, deterministic)
-}
-func (m *UploadedResp) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_UploadedResp.Merge(m, src)
-}
-func (m *UploadedResp) XXX_Size() int {
-	return xxx_messageInfo_UploadedResp.Size(m)
-}
-func (m *UploadedResp) XXX_DiscardUnknown() {
-	xxx_messageInfo_UploadedResp.DiscardUnknown(m)
-}
-
-var xxx_messageInfo_UploadedResp proto.InternalMessageInfo
-
-func (m *UploadedResp) GetOk() bool {
-	if m != nil {
-		return m.Ok
-	}
-	return false
 }
 
 type GetVideoListReq struct {
@@ -226,7 +156,7 @@ func (m *GetVideoListReq) Reset()         { *m = GetVideoListReq{} }
 func (m *GetVideoListReq) String() string { return proto.CompactTextString(m) }
 func (*GetVideoListReq) ProtoMessage()    {}
 func (*GetVideoListReq) Descriptor() ([]byte, []int) {
-	return fileDescriptor_0ad4ea8866efb1e3, []int{4}
+	return fileDescriptor_0ad4ea8866efb1e3, []int{2}
 }
 
 func (m *GetVideoListReq) XXX_Unmarshal(b []byte) error {
@@ -288,7 +218,7 @@ func (m *GetVideoListResp) Reset()         { *m = GetVideoListResp{} }
 func (m *GetVideoListResp) String() string { return proto.CompactTextString(m) }
 func (*GetVideoListResp) ProtoMessage()    {}
 func (*GetVideoListResp) Descriptor() ([]byte, []int) {
-	return fileDescriptor_0ad4ea8866efb1e3, []int{5}
+	return fileDescriptor_0ad4ea8866efb1e3, []int{3}
 }
 
 func (m *GetVideoListResp) XXX_Unmarshal(b []byte) error {
@@ -333,6 +263,8 @@ func (m *GetVideoListResp) GetTotalCount() int64 {
 type GetVideoListRespVideoItem struct {
 	Id                   int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	Name                 string   `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	CreatedAt            string   `protobuf:"bytes,3,opt,name=createdAt,proto3" json:"createdAt,omitempty"`
+	Desc                 string   `protobuf:"bytes,4,opt,name=desc,proto3" json:"desc,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -342,7 +274,7 @@ func (m *GetVideoListRespVideoItem) Reset()         { *m = GetVideoListRespVideo
 func (m *GetVideoListRespVideoItem) String() string { return proto.CompactTextString(m) }
 func (*GetVideoListRespVideoItem) ProtoMessage()    {}
 func (*GetVideoListRespVideoItem) Descriptor() ([]byte, []int) {
-	return fileDescriptor_0ad4ea8866efb1e3, []int{5, 0}
+	return fileDescriptor_0ad4ea8866efb1e3, []int{3, 0}
 }
 
 func (m *GetVideoListRespVideoItem) XXX_Unmarshal(b []byte) error {
@@ -377,6 +309,20 @@ func (m *GetVideoListRespVideoItem) GetName() string {
 	return ""
 }
 
+func (m *GetVideoListRespVideoItem) GetCreatedAt() string {
+	if m != nil {
+		return m.CreatedAt
+	}
+	return ""
+}
+
+func (m *GetVideoListRespVideoItem) GetDesc() string {
+	if m != nil {
+		return m.Desc
+	}
+	return ""
+}
+
 type DeleteReq struct {
 	Id                   int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
@@ -388,7 +334,7 @@ func (m *DeleteReq) Reset()         { *m = DeleteReq{} }
 func (m *DeleteReq) String() string { return proto.CompactTextString(m) }
 func (*DeleteReq) ProtoMessage()    {}
 func (*DeleteReq) Descriptor() ([]byte, []int) {
-	return fileDescriptor_0ad4ea8866efb1e3, []int{6}
+	return fileDescriptor_0ad4ea8866efb1e3, []int{4}
 }
 
 func (m *DeleteReq) XXX_Unmarshal(b []byte) error {
@@ -427,7 +373,7 @@ func (m *DeleteResp) Reset()         { *m = DeleteResp{} }
 func (m *DeleteResp) String() string { return proto.CompactTextString(m) }
 func (*DeleteResp) ProtoMessage()    {}
 func (*DeleteResp) Descriptor() ([]byte, []int) {
-	return fileDescriptor_0ad4ea8866efb1e3, []int{7}
+	return fileDescriptor_0ad4ea8866efb1e3, []int{5}
 }
 
 func (m *DeleteResp) XXX_Unmarshal(b []byte) error {
@@ -456,8 +402,7 @@ func (m *DeleteResp) GetOk() bool {
 }
 
 type GetOneReq struct {
-	UserId               int64    `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Name                 string   `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	Id                   int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -467,7 +412,7 @@ func (m *GetOneReq) Reset()         { *m = GetOneReq{} }
 func (m *GetOneReq) String() string { return proto.CompactTextString(m) }
 func (*GetOneReq) ProtoMessage()    {}
 func (*GetOneReq) Descriptor() ([]byte, []int) {
-	return fileDescriptor_0ad4ea8866efb1e3, []int{8}
+	return fileDescriptor_0ad4ea8866efb1e3, []int{6}
 }
 
 func (m *GetOneReq) XXX_Unmarshal(b []byte) error {
@@ -488,24 +433,19 @@ func (m *GetOneReq) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_GetOneReq proto.InternalMessageInfo
 
-func (m *GetOneReq) GetUserId() int64 {
+func (m *GetOneReq) GetId() int64 {
 	if m != nil {
-		return m.UserId
+		return m.Id
 	}
 	return 0
 }
 
-func (m *GetOneReq) GetName() string {
-	if m != nil {
-		return m.Name
-	}
-	return ""
-}
-
 type GetOneResp struct {
-	Path                 string   `protobuf:"bytes,1,opt,name=path,proto3" json:"path,omitempty"`
-	CreatedAt            string   `protobuf:"bytes,2,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	FinishedAt           string   `protobuf:"bytes,3,opt,name=finished_at,json=finishedAt,proto3" json:"finished_at,omitempty"`
+	UserId               int64    `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	Name                 string   `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
+	CreatedAt            string   `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	Desc                 string   `protobuf:"bytes,4,opt,name=desc,proto3" json:"desc,omitempty"`
+	FileId               int64    `protobuf:"varint,5.png,opt,name=file_id,json=fileId,proto3" json:"file_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
@@ -515,7 +455,7 @@ func (m *GetOneResp) Reset()         { *m = GetOneResp{} }
 func (m *GetOneResp) String() string { return proto.CompactTextString(m) }
 func (*GetOneResp) ProtoMessage()    {}
 func (*GetOneResp) Descriptor() ([]byte, []int) {
-	return fileDescriptor_0ad4ea8866efb1e3, []int{9}
+	return fileDescriptor_0ad4ea8866efb1e3, []int{7}
 }
 
 func (m *GetOneResp) XXX_Unmarshal(b []byte) error {
@@ -536,9 +476,16 @@ func (m *GetOneResp) XXX_DiscardUnknown() {
 
 var xxx_messageInfo_GetOneResp proto.InternalMessageInfo
 
-func (m *GetOneResp) GetPath() string {
+func (m *GetOneResp) GetUserId() int64 {
 	if m != nil {
-		return m.Path
+		return m.UserId
+	}
+	return 0
+}
+
+func (m *GetOneResp) GetName() string {
+	if m != nil {
+		return m.Name
 	}
 	return ""
 }
@@ -550,18 +497,23 @@ func (m *GetOneResp) GetCreatedAt() string {
 	return ""
 }
 
-func (m *GetOneResp) GetFinishedAt() string {
+func (m *GetOneResp) GetDesc() string {
 	if m != nil {
-		return m.FinishedAt
+		return m.Desc
 	}
 	return ""
 }
 
+func (m *GetOneResp) GetFileId() int64 {
+	if m != nil {
+		return m.FileId
+	}
+	return 0
+}
+
 func init() {
-	proto.RegisterType((*UploadingReq)(nil), "video.uploadingReq")
-	proto.RegisterType((*UploadingResp)(nil), "video.uploadingResp")
-	proto.RegisterType((*UploadedReq)(nil), "video.uploadedReq")
-	proto.RegisterType((*UploadedResp)(nil), "video.uploadedResp")
+	proto.RegisterType((*CreateReq)(nil), "video.createReq")
+	proto.RegisterType((*CreateResp)(nil), "video.createResp")
 	proto.RegisterType((*GetVideoListReq)(nil), "video.getVideoListReq")
 	proto.RegisterType((*GetVideoListResp)(nil), "video.getVideoListResp")
 	proto.RegisterType((*GetVideoListRespVideoItem)(nil), "video.getVideoListResp.videoItem")
@@ -574,37 +526,35 @@ func init() {
 func init() { proto.RegisterFile("video.proto", fileDescriptor_0ad4ea8866efb1e3) }
 
 var fileDescriptor_0ad4ea8866efb1e3 = []byte{
-	// 470 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0xa4, 0x54, 0xc1, 0x6e, 0xd3, 0x40,
-	0x10, 0x95, 0xed, 0x90, 0xc6, 0xe3, 0x02, 0x65, 0x8a, 0xa8, 0xe5, 0x02, 0x0d, 0x7b, 0xca, 0x85,
-	0x56, 0x6a, 0x05, 0xe2, 0x86, 0x0a, 0xe2, 0x50, 0x09, 0x01, 0x32, 0x12, 0x87, 0x5e, 0x8c, 0xe9,
-	0x0e, 0xe9, 0xaa, 0x89, 0x77, 0x9b, 0xdd, 0x70, 0xc8, 0x6f, 0xf0, 0x3b, 0x7c, 0x1c, 0xda, 0x5d,
-	0xdb, 0x71, 0x93, 0x40, 0x0f, 0x3d, 0x65, 0xf7, 0xcd, 0x9b, 0x19, 0xcf, 0x7b, 0xb3, 0x81, 0xe4,
-	0x97, 0xe0, 0x24, 0x0f, 0xd5, 0x4c, 0x1a, 0x89, 0xf7, 0xdc, 0x85, 0x9d, 0xc3, 0xf6, 0x5c, 0x4d,
-	0x64, 0xc9, 0x45, 0x35, 0xce, 0xe9, 0x1a, 0xf7, 0x60, 0x6b, 0xae, 0x69, 0x56, 0x08, 0x9e, 0x06,
-	0xc3, 0x60, 0x14, 0xe5, 0x7d, 0x7b, 0x3d, 0xe3, 0xf8, 0x0c, 0xc0, 0x65, 0x14, 0x55, 0x39, 0xa5,
-	0x34, 0x1c, 0x06, 0xa3, 0x38, 0x8f, 0x1d, 0xf2, 0xa9, 0x9c, 0x12, 0x22, 0xf4, 0x54, 0x69, 0x2e,
-	0xd3, 0xc8, 0x05, 0xdc, 0x99, 0x1d, 0xc1, 0xfd, 0x4e, 0x6d, 0xad, 0xf0, 0x01, 0x84, 0xf2, 0xca,
-	0xd5, 0x1d, 0xe4, 0xa1, 0xbc, 0xb2, 0x77, 0xc1, 0x5d, 0xad, 0x28, 0x0f, 0x05, 0x67, 0x1f, 0x20,
-	0xf1, 0x09, 0xc4, 0xef, 0xf0, 0x2d, 0xec, 0x79, 0x33, 0x93, 0x2d, 0xb3, 0xde, 0x96, 0x2d, 0xe0,
-	0xe1, 0x98, 0xcc, 0x37, 0xcb, 0xff, 0x28, 0xb4, 0xb9, 0xad, 0xd5, 0xc5, 0x8c, 0x4a, 0x43, 0xbc,
-	0x28, 0x4d, 0xd3, 0xaa, 0x46, 0x4e, 0x8d, 0x1f, 0x7b, 0x4c, 0x6e, 0xec, 0x28, 0x77, 0x67, 0xdc,
-	0x87, 0xd8, 0xfe, 0x16, 0x5a, 0x2c, 0x28, 0xed, 0xb9, 0xc0, 0xc0, 0x02, 0x5f, 0xc5, 0x82, 0xd8,
-	0x9f, 0x00, 0x76, 0x6e, 0x36, 0xd7, 0x0a, 0x5f, 0x41, 0x6f, 0x22, 0xb4, 0x49, 0x83, 0x61, 0x34,
-	0x4a, 0x8e, 0x5f, 0x1c, 0x7a, 0x9f, 0x56, 0x69, 0x1e, 0x3e, 0x33, 0x34, 0xcd, 0x1d, 0x1d, 0x0f,
-	0x20, 0x31, 0xd2, 0x94, 0x93, 0xc2, 0x56, 0xd7, 0xb5, 0x8e, 0xe0, 0xa0, 0x2f, 0x16, 0x59, 0x12,
-	0x2e, 0xe4, 0xbc, 0x32, 0xf5, 0x47, 0x7a, 0xc2, 0x7b, 0x8b, 0x64, 0x47, 0x10, 0xb7, 0x45, 0x6b,
-	0x37, 0x82, 0xc6, 0x0d, 0x3b, 0x5b, 0x47, 0x5f, 0x77, 0x66, 0xfb, 0x10, 0x73, 0x9a, 0x90, 0x21,
-	0x2b, 0xda, 0x4a, 0x02, 0x7b, 0x0a, 0xd0, 0x04, 0x37, 0xa8, 0xfe, 0x06, 0xe2, 0x31, 0x99, 0xcf,
-	0x15, 0xfd, 0x57, 0xef, 0x4d, 0x4d, 0xbf, 0x03, 0x34, 0x99, 0x5a, 0xb5, 0x9b, 0x16, 0x2c, 0x37,
-	0xed, 0x36, 0x97, 0x0e, 0x20, 0xf9, 0x29, 0x2a, 0xa1, 0x2f, 0x7d, 0xdc, 0xef, 0x28, 0x34, 0xd0,
-	0xa9, 0x39, 0xfe, 0x1d, 0x82, 0x7f, 0x0f, 0xf8, 0x1a, 0xe2, 0x76, 0x67, 0x71, 0xb7, 0x76, 0xa2,
-	0xfb, 0x42, 0xb2, 0xc7, 0xeb, 0xa0, 0x56, 0x78, 0x02, 0x83, 0x66, 0xe7, 0x10, 0x6f, 0x30, 0xdc,
-	0x2e, 0x67, 0xbb, 0x6b, 0x98, 0x56, 0xf8, 0x16, 0xb6, 0xbb, 0x26, 0xe3, 0x93, 0x8d, 0xce, 0x5f,
-	0x67, 0x7b, 0xff, 0xd8, 0x08, 0x7c, 0x09, 0x7d, 0xaf, 0x0c, 0xee, 0x2c, 0x29, 0x5e, 0xe2, 0xec,
-	0xd1, 0x0a, 0xe2, 0xe9, 0xde, 0xa0, 0x96, 0xde, 0x9a, 0xd9, 0xd2, 0x97, 0x0e, 0xbe, 0xdb, 0x3a,
-	0xf7, 0xa2, 0xfc, 0xe8, 0xbb, 0xbf, 0x8c, 0x93, 0xbf, 0x01, 0x00, 0x00, 0xff, 0xff, 0x22, 0x46,
-	0xa4, 0x70, 0x41, 0x04, 0x00, 0x00,
+	// 447 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x53, 0xc1, 0x8e, 0xd3, 0x30,
+	0x10, 0x95, 0x93, 0x36, 0xbb, 0x99, 0x22, 0x58, 0x7c, 0x60, 0xa3, 0xee, 0x22, 0x4a, 0x4e, 0x3d,
+	0xb0, 0x7b, 0x58, 0xc4, 0x19, 0x01, 0xa7, 0x4a, 0x08, 0x90, 0x91, 0x38, 0x70, 0x89, 0x42, 0x3d,
+	0x54, 0x56, 0xd3, 0x26, 0xad, 0x5d, 0x0e, 0xbd, 0x73, 0xe6, 0xeb, 0xf8, 0x0d, 0xbe, 0x01, 0x8d,
+	0x9d, 0xb8, 0x49, 0x68, 0xd1, 0x9e, 0x12, 0xbf, 0x19, 0xfb, 0xf9, 0xbd, 0x37, 0x86, 0xd1, 0x0f,
+	0x25, 0xb1, 0xbc, 0xad, 0xb6, 0xa5, 0x29, 0xf9, 0xd0, 0x2e, 0xd2, 0x5f, 0x0c, 0xe2, 0xf9, 0x16,
+	0x73, 0x83, 0x02, 0x37, 0xfc, 0x12, 0xce, 0x76, 0x1a, 0xb7, 0x99, 0x92, 0x09, 0x9b, 0xb0, 0x69,
+	0x28, 0x22, 0x5a, 0xce, 0x24, 0x15, 0xbe, 0xab, 0x02, 0xa9, 0x10, 0xb8, 0x02, 0x2d, 0x67, 0x92,
+	0x3f, 0x05, 0xb0, 0x07, 0x65, 0xeb, 0x7c, 0x85, 0x49, 0x38, 0x61, 0xd3, 0x58, 0xc4, 0x16, 0xf9,
+	0x90, 0xaf, 0x90, 0x73, 0x18, 0x48, 0xd4, 0xf3, 0x64, 0x60, 0x0b, 0xf6, 0x9f, 0xb6, 0x38, 0x46,
+	0x99, 0xe5, 0x26, 0x19, 0xba, 0x2d, 0x35, 0xf2, 0xc6, 0xa4, 0x2f, 0x9a, 0xb2, 0x40, 0x5d, 0xf1,
+	0x87, 0x10, 0x94, 0x4b, 0x7b, 0x99, 0x73, 0x11, 0x94, 0x4b, 0x5a, 0xfb, 0x3b, 0x04, 0x4a, 0xa6,
+	0x7b, 0x78, 0xb4, 0x40, 0xf3, 0x85, 0x08, 0xdf, 0x2b, 0x6d, 0xfe, 0x2b, 0xa2, 0x4b, 0x1c, 0xf4,
+	0x88, 0xe9, 0xae, 0x55, 0xbe, 0x70, 0x22, 0x42, 0x61, 0xff, 0xf9, 0x15, 0xc4, 0xf4, 0xcd, 0xb4,
+	0xda, 0xa3, 0x15, 0x11, 0x8a, 0x73, 0x02, 0x3e, 0xab, 0x3d, 0xa6, 0x7f, 0x18, 0x5c, 0x74, 0xc9,
+	0x75, 0xc5, 0x5f, 0xc1, 0xa0, 0x50, 0xda, 0x24, 0x6c, 0x12, 0x4e, 0x47, 0x77, 0xcf, 0x6f, 0x9d,
+	0xe7, 0xfd, 0x36, 0x07, 0xcf, 0x0c, 0xae, 0x84, 0x6d, 0xe7, 0xcf, 0x60, 0x64, 0x4a, 0x93, 0x17,
+	0x19, 0x9d, 0xae, 0x6b, 0x81, 0x60, 0xa1, 0x4f, 0x84, 0x1c, 0x1a, 0xe6, 0xe5, 0x6e, 0x6d, 0xea,
+	0x4b, 0xba, 0x86, 0x77, 0x84, 0x8c, 0x73, 0x88, 0xfd, 0xa1, 0xb5, 0x4d, 0xac, 0xb1, 0x89, 0xb4,
+	0xd9, 0x80, 0x9c, 0x68, 0xfb, 0xcf, 0xaf, 0xe1, 0x20, 0xbe, 0x49, 0xae, 0xe3, 0x46, 0x3f, 0xb9,
+	0xf4, 0x0a, 0x62, 0x89, 0x05, 0xba, 0x59, 0xe9, 0x51, 0xa4, 0xd7, 0x00, 0x4d, 0xf1, 0xdf, 0xdc,
+	0x68, 0xeb, 0x02, 0xcd, 0xc7, 0xf5, 0xd1, 0xad, 0x3f, 0x19, 0x40, 0x53, 0xd5, 0xd5, 0xe9, 0x00,
+	0x8f, 0xa9, 0xe8, 0x86, 0x7a, 0x1f, 0x19, 0xed, 0x61, 0x1e, 0xb6, 0x87, 0xf9, 0xee, 0x37, 0x03,
+	0xf7, 0x2c, 0xf8, 0x0d, 0x44, 0xee, 0x0c, 0x7e, 0x51, 0x27, 0xe8, 0x1f, 0xc9, 0xf8, 0x71, 0x0f,
+	0xd1, 0x15, 0x7f, 0x0d, 0x0f, 0xda, 0x09, 0xf3, 0x27, 0x47, 0x63, 0xdf, 0x8c, 0x2f, 0x4f, 0x8c,
+	0x03, 0xf1, 0x39, 0x03, 0x3c, 0x9f, 0x77, 0xcb, 0xf3, 0xb5, 0x1c, 0xba, 0x81, 0xc8, 0x79, 0xed,
+	0xdb, 0x7d, 0x2e, 0xbe, 0xfd, 0x10, 0xc6, 0xdb, 0xb3, 0xaf, 0x4e, 0xd6, 0xb7, 0xc8, 0xbe, 0xfd,
+	0x97, 0x7f, 0x03, 0x00, 0x00, 0xff, 0xff, 0xac, 0xea, 0x2f, 0x33, 0x0a, 0x04, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -619,8 +569,7 @@ const _ = grpc.SupportPackageIsVersion4
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type VideoClient interface {
-	Uploading(ctx context.Context, in *UploadingReq, opts ...grpc.CallOption) (*UploadingResp, error)
-	Uploaded(ctx context.Context, in *UploadedReq, opts ...grpc.CallOption) (*UploadedResp, error)
+	Create(ctx context.Context, in *CreateReq, opts ...grpc.CallOption) (*CreateResp, error)
 	GetVideoList(ctx context.Context, in *GetVideoListReq, opts ...grpc.CallOption) (*GetVideoListResp, error)
 	GetOne(ctx context.Context, in *GetOneReq, opts ...grpc.CallOption) (*GetOneResp, error)
 	Delete(ctx context.Context, in *DeleteReq, opts ...grpc.CallOption) (*DeleteResp, error)
@@ -634,18 +583,9 @@ func NewVideoClient(cc *grpc.ClientConn) VideoClient {
 	return &videoClient{cc}
 }
 
-func (c *videoClient) Uploading(ctx context.Context, in *UploadingReq, opts ...grpc.CallOption) (*UploadingResp, error) {
-	out := new(UploadingResp)
-	err := c.cc.Invoke(ctx, "/video.video/uploading", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
-func (c *videoClient) Uploaded(ctx context.Context, in *UploadedReq, opts ...grpc.CallOption) (*UploadedResp, error) {
-	out := new(UploadedResp)
-	err := c.cc.Invoke(ctx, "/video.video/uploaded", in, out, opts...)
+func (c *videoClient) Create(ctx context.Context, in *CreateReq, opts ...grpc.CallOption) (*CreateResp, error) {
+	out := new(CreateResp)
+	err := c.cc.Invoke(ctx, "/video.video/create", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -681,8 +621,7 @@ func (c *videoClient) Delete(ctx context.Context, in *DeleteReq, opts ...grpc.Ca
 
 // VideoServer is the server API for Video service.
 type VideoServer interface {
-	Uploading(context.Context, *UploadingReq) (*UploadingResp, error)
-	Uploaded(context.Context, *UploadedReq) (*UploadedResp, error)
+	Create(context.Context, *CreateReq) (*CreateResp, error)
 	GetVideoList(context.Context, *GetVideoListReq) (*GetVideoListResp, error)
 	GetOne(context.Context, *GetOneReq) (*GetOneResp, error)
 	Delete(context.Context, *DeleteReq) (*DeleteResp, error)
@@ -692,11 +631,8 @@ type VideoServer interface {
 type UnimplementedVideoServer struct {
 }
 
-func (*UnimplementedVideoServer) Uploading(ctx context.Context, req *UploadingReq) (*UploadingResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Uploading not implemented")
-}
-func (*UnimplementedVideoServer) Uploaded(ctx context.Context, req *UploadedReq) (*UploadedResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Uploaded not implemented")
+func (*UnimplementedVideoServer) Create(ctx context.Context, req *CreateReq) (*CreateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
 }
 func (*UnimplementedVideoServer) GetVideoList(ctx context.Context, req *GetVideoListReq) (*GetVideoListResp, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetVideoList not implemented")
@@ -712,38 +648,20 @@ func RegisterVideoServer(s *grpc.Server, srv VideoServer) {
 	s.RegisterService(&_Video_serviceDesc, srv)
 }
 
-func _Video_Uploading_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UploadingReq)
+func _Video_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(VideoServer).Uploading(ctx, in)
+		return srv.(VideoServer).Create(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/video.video/Uploading",
+		FullMethod: "/video.video/Create",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(VideoServer).Uploading(ctx, req.(*UploadingReq))
-	}
-	return interceptor(ctx, in, info, handler)
-}
-
-func _Video_Uploaded_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(UploadedReq)
-	if err := dec(in); err != nil {
-		return nil, err
-	}
-	if interceptor == nil {
-		return srv.(VideoServer).Uploaded(ctx, in)
-	}
-	info := &grpc.UnaryServerInfo{
-		Server:     srv,
-		FullMethod: "/video.video/Uploaded",
-	}
-	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(VideoServer).Uploaded(ctx, req.(*UploadedReq))
+		return srv.(VideoServer).Create(ctx, req.(*CreateReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -807,12 +725,8 @@ var _Video_serviceDesc = grpc.ServiceDesc{
 	HandlerType: (*VideoServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "uploading",
-			Handler:    _Video_Uploading_Handler,
-		},
-		{
-			MethodName: "uploaded",
-			Handler:    _Video_Uploaded_Handler,
+			MethodName: "create",
+			Handler:    _Video_Create_Handler,
 		},
 		{
 			MethodName: "getVideoList",

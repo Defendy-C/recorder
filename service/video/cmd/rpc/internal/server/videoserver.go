@@ -21,14 +21,9 @@ func NewVideoServer(svcCtx *svc.ServiceContext) *VideoServer {
 	}
 }
 
-func (s *VideoServer) Uploading(ctx context.Context, in *video.UploadingReq) (*video.UploadingResp, error) {
-	l := logic.NewUploadingLogic(ctx, s.svcCtx)
-	return l.Uploading(in)
-}
-
-func (s *VideoServer) Uploaded(ctx context.Context, in *video.UploadedReq) (*video.UploadedResp, error) {
-	l := logic.NewUploadedLogic(ctx, s.svcCtx)
-	return l.Uploaded(in)
+func (s *VideoServer) Create(ctx context.Context, in *video.CreateReq) (*video.CreateResp, error) {
+	l := logic.NewCreateLogic(ctx, s.svcCtx)
+	return l.Create(in)
 }
 
 func (s *VideoServer) GetVideoList(ctx context.Context, in *video.GetVideoListReq) (*video.GetVideoListResp, error) {

@@ -24,8 +24,18 @@ func RegisterHandlers(engine *rest.Server, serverCtx *svc.ServiceContext) {
 		[]rest.Route{
 			{
 				Method:  http.MethodPost,
-				Path:    "/video/upload",
+				Path:    "/video/upload/conn",
+				Handler: uploadConnHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/video/upload/:id/:chunk",
 				Handler: uploadHandler(serverCtx),
+			},
+			{
+				Method:  http.MethodPost,
+				Path:    "/video/download/:id/:chunk",
+				Handler: downloadHandler(serverCtx),
 			},
 		},
 		rest.WithJwt(serverCtx.Config.Auth.AccessSecret),

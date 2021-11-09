@@ -10,13 +10,31 @@ type LoginResp struct {
 	Token string `json:"token"`
 }
 
+type UploadConnReq struct {
+	UserId    int    `json:"user_id"`
+	VideoName string `json:"video_name"`
+	Desc      string `json:"desc"`
+	Chunks    int    `json:"chunks"`
+}
+
+type UploadConnResp struct {
+	Ok bool `json:"ok"`
+	Id int  `json:"id"`
+}
+
 type UploadReq struct {
-	UserId int    `form:"user_id"`
-	Name   string `form:"name"`
-	Chunks int    `form:"chunks"`
-	Chunk  int    `form:"chunk"`
+	Id    int `path:"id"`
+	Chunk int `path:"chunk"`
 }
 
 type UploadResp struct {
 	Ok bool `json:"ok"`
+}
+
+type DownloadReq struct {
+	Id    int `path:"id"`
+	Chunk int `path:"chunk"`
+}
+
+type DownloadResp struct {
 }

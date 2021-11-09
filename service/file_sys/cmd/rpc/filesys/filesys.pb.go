@@ -24,86 +24,62 @@ var _ = math.Inf
 // proto package needs to be updated.
 const _ = proto.ProtoPackageIsVersion3 // please upgrade the proto package
 
-type StorePartlyReq struct {
-	UserId               int64    `protobuf:"varint,1,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
-	Filename             string   `protobuf:"bytes,2,opt,name=filename,proto3" json:"filename,omitempty"`
-	CreatedAt            string   `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
-	Data                 []byte   `protobuf:"bytes,4,opt,name=data,proto3" json:"data,omitempty"`
-	Chunk                int64    `protobuf:"varint,5,opt,name=chunk,proto3" json:"chunk,omitempty"`
-	Chunks               int64    `protobuf:"varint,6,opt,name=chunks,proto3" json:"chunks,omitempty"`
+type StoreReq struct {
+	Id                   int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Chunk                int64    `protobuf:"varint,2,opt,name=chunk,proto3" json:"chunk,omitempty"`
+	Data                 []byte   `protobuf:"bytes,3,opt,name=data,proto3" json:"data,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *StorePartlyReq) Reset()         { *m = StorePartlyReq{} }
-func (m *StorePartlyReq) String() string { return proto.CompactTextString(m) }
-func (*StorePartlyReq) ProtoMessage()    {}
-func (*StorePartlyReq) Descriptor() ([]byte, []int) {
+func (m *StoreReq) Reset()         { *m = StoreReq{} }
+func (m *StoreReq) String() string { return proto.CompactTextString(m) }
+func (*StoreReq) ProtoMessage()    {}
+func (*StoreReq) Descriptor() ([]byte, []int) {
 	return fileDescriptor_ab43d0115fee6550, []int{0}
 }
 
-func (m *StorePartlyReq) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_StorePartlyReq.Unmarshal(m, b)
+func (m *StoreReq) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_StoreReq.Unmarshal(m, b)
 }
-func (m *StorePartlyReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_StorePartlyReq.Marshal(b, m, deterministic)
+func (m *StoreReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_StoreReq.Marshal(b, m, deterministic)
 }
-func (m *StorePartlyReq) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_StorePartlyReq.Merge(m, src)
+func (m *StoreReq) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_StoreReq.Merge(m, src)
 }
-func (m *StorePartlyReq) XXX_Size() int {
-	return xxx_messageInfo_StorePartlyReq.Size(m)
+func (m *StoreReq) XXX_Size() int {
+	return xxx_messageInfo_StoreReq.Size(m)
 }
-func (m *StorePartlyReq) XXX_DiscardUnknown() {
-	xxx_messageInfo_StorePartlyReq.DiscardUnknown(m)
+func (m *StoreReq) XXX_DiscardUnknown() {
+	xxx_messageInfo_StoreReq.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_StorePartlyReq proto.InternalMessageInfo
+var xxx_messageInfo_StoreReq proto.InternalMessageInfo
 
-func (m *StorePartlyReq) GetUserId() int64 {
+func (m *StoreReq) GetId() int64 {
 	if m != nil {
-		return m.UserId
+		return m.Id
 	}
 	return 0
 }
 
-func (m *StorePartlyReq) GetFilename() string {
-	if m != nil {
-		return m.Filename
-	}
-	return ""
-}
-
-func (m *StorePartlyReq) GetCreatedAt() string {
-	if m != nil {
-		return m.CreatedAt
-	}
-	return ""
-}
-
-func (m *StorePartlyReq) GetData() []byte {
-	if m != nil {
-		return m.Data
-	}
-	return nil
-}
-
-func (m *StorePartlyReq) GetChunk() int64 {
+func (m *StoreReq) GetChunk() int64 {
 	if m != nil {
 		return m.Chunk
 	}
 	return 0
 }
 
-func (m *StorePartlyReq) GetChunks() int64 {
+func (m *StoreReq) GetData() []byte {
 	if m != nil {
-		return m.Chunks
+		return m.Data
 	}
-	return 0
+	return nil
 }
 
-type StorePartlyResp struct {
+type StoreResp struct {
 	Path                 string   `protobuf:"bytes,1,opt,name=path,proto3" json:"path,omitempty"`
 	IsFinished           bool     `protobuf:"varint,2,opt,name=is_finished,json=isFinished,proto3" json:"is_finished,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
@@ -111,70 +87,366 @@ type StorePartlyResp struct {
 	XXX_sizecache        int32    `json:"-"`
 }
 
-func (m *StorePartlyResp) Reset()         { *m = StorePartlyResp{} }
-func (m *StorePartlyResp) String() string { return proto.CompactTextString(m) }
-func (*StorePartlyResp) ProtoMessage()    {}
-func (*StorePartlyResp) Descriptor() ([]byte, []int) {
+func (m *StoreResp) Reset()         { *m = StoreResp{} }
+func (m *StoreResp) String() string { return proto.CompactTextString(m) }
+func (*StoreResp) ProtoMessage()    {}
+func (*StoreResp) Descriptor() ([]byte, []int) {
 	return fileDescriptor_ab43d0115fee6550, []int{1}
 }
 
-func (m *StorePartlyResp) XXX_Unmarshal(b []byte) error {
-	return xxx_messageInfo_StorePartlyResp.Unmarshal(m, b)
+func (m *StoreResp) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_StoreResp.Unmarshal(m, b)
 }
-func (m *StorePartlyResp) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
-	return xxx_messageInfo_StorePartlyResp.Marshal(b, m, deterministic)
+func (m *StoreResp) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_StoreResp.Marshal(b, m, deterministic)
 }
-func (m *StorePartlyResp) XXX_Merge(src proto.Message) {
-	xxx_messageInfo_StorePartlyResp.Merge(m, src)
+func (m *StoreResp) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_StoreResp.Merge(m, src)
 }
-func (m *StorePartlyResp) XXX_Size() int {
-	return xxx_messageInfo_StorePartlyResp.Size(m)
+func (m *StoreResp) XXX_Size() int {
+	return xxx_messageInfo_StoreResp.Size(m)
 }
-func (m *StorePartlyResp) XXX_DiscardUnknown() {
-	xxx_messageInfo_StorePartlyResp.DiscardUnknown(m)
+func (m *StoreResp) XXX_DiscardUnknown() {
+	xxx_messageInfo_StoreResp.DiscardUnknown(m)
 }
 
-var xxx_messageInfo_StorePartlyResp proto.InternalMessageInfo
+var xxx_messageInfo_StoreResp proto.InternalMessageInfo
 
-func (m *StorePartlyResp) GetPath() string {
+func (m *StoreResp) GetPath() string {
 	if m != nil {
 		return m.Path
 	}
 	return ""
 }
 
-func (m *StorePartlyResp) GetIsFinished() bool {
+func (m *StoreResp) GetIsFinished() bool {
 	if m != nil {
 		return m.IsFinished
 	}
 	return false
 }
 
+type GetFileInfoReq struct {
+	Id                   int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *GetFileInfoReq) Reset()         { *m = GetFileInfoReq{} }
+func (m *GetFileInfoReq) String() string { return proto.CompactTextString(m) }
+func (*GetFileInfoReq) ProtoMessage()    {}
+func (*GetFileInfoReq) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ab43d0115fee6550, []int{2}
+}
+
+func (m *GetFileInfoReq) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_GetFileInfoReq.Unmarshal(m, b)
+}
+func (m *GetFileInfoReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GetFileInfoReq.Marshal(b, m, deterministic)
+}
+func (m *GetFileInfoReq) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GetFileInfoReq.Merge(m, src)
+}
+func (m *GetFileInfoReq) XXX_Size() int {
+	return xxx_messageInfo_GetFileInfoReq.Size(m)
+}
+func (m *GetFileInfoReq) XXX_DiscardUnknown() {
+	xxx_messageInfo_GetFileInfoReq.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GetFileInfoReq proto.InternalMessageInfo
+
+func (m *GetFileInfoReq) GetId() int64 {
+	if m != nil {
+		return m.Id
+	}
+	return 0
+}
+
+type GetFileInfoResp struct {
+	CreatedAt            string   `protobuf:"bytes,1,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	IsFinished           bool     `protobuf:"varint,2,opt,name=is_finished,json=isFinished,proto3" json:"is_finished,omitempty"`
+	TotalChunks          int64    `protobuf:"varint,3,opt,name=total_chunks,json=totalChunks,proto3" json:"total_chunks,omitempty"`
+	CurrentChunks        int64    `protobuf:"varint,4,opt,name=current_chunks,json=currentChunks,proto3" json:"current_chunks,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *GetFileInfoResp) Reset()         { *m = GetFileInfoResp{} }
+func (m *GetFileInfoResp) String() string { return proto.CompactTextString(m) }
+func (*GetFileInfoResp) ProtoMessage()    {}
+func (*GetFileInfoResp) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ab43d0115fee6550, []int{3}
+}
+
+func (m *GetFileInfoResp) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_GetFileInfoResp.Unmarshal(m, b)
+}
+func (m *GetFileInfoResp) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GetFileInfoResp.Marshal(b, m, deterministic)
+}
+func (m *GetFileInfoResp) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GetFileInfoResp.Merge(m, src)
+}
+func (m *GetFileInfoResp) XXX_Size() int {
+	return xxx_messageInfo_GetFileInfoResp.Size(m)
+}
+func (m *GetFileInfoResp) XXX_DiscardUnknown() {
+	xxx_messageInfo_GetFileInfoResp.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GetFileInfoResp proto.InternalMessageInfo
+
+func (m *GetFileInfoResp) GetCreatedAt() string {
+	if m != nil {
+		return m.CreatedAt
+	}
+	return ""
+}
+
+func (m *GetFileInfoResp) GetIsFinished() bool {
+	if m != nil {
+		return m.IsFinished
+	}
+	return false
+}
+
+func (m *GetFileInfoResp) GetTotalChunks() int64 {
+	if m != nil {
+		return m.TotalChunks
+	}
+	return 0
+}
+
+func (m *GetFileInfoResp) GetCurrentChunks() int64 {
+	if m != nil {
+		return m.CurrentChunks
+	}
+	return 0
+}
+
+type GetFileReq struct {
+	Id                   int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	Chunk                int64    `protobuf:"varint,2,opt,name=chunk,proto3" json:"chunk,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *GetFileReq) Reset()         { *m = GetFileReq{} }
+func (m *GetFileReq) String() string { return proto.CompactTextString(m) }
+func (*GetFileReq) ProtoMessage()    {}
+func (*GetFileReq) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ab43d0115fee6550, []int{4}
+}
+
+func (m *GetFileReq) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_GetFileReq.Unmarshal(m, b)
+}
+func (m *GetFileReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GetFileReq.Marshal(b, m, deterministic)
+}
+func (m *GetFileReq) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GetFileReq.Merge(m, src)
+}
+func (m *GetFileReq) XXX_Size() int {
+	return xxx_messageInfo_GetFileReq.Size(m)
+}
+func (m *GetFileReq) XXX_DiscardUnknown() {
+	xxx_messageInfo_GetFileReq.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GetFileReq proto.InternalMessageInfo
+
+func (m *GetFileReq) GetId() int64 {
+	if m != nil {
+		return m.Id
+	}
+	return 0
+}
+
+func (m *GetFileReq) GetChunk() int64 {
+	if m != nil {
+		return m.Chunk
+	}
+	return 0
+}
+
+type GetFileResp struct {
+	File                 []byte   `protobuf:"bytes,1,opt,name=file,proto3" json:"file,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *GetFileResp) Reset()         { *m = GetFileResp{} }
+func (m *GetFileResp) String() string { return proto.CompactTextString(m) }
+func (*GetFileResp) ProtoMessage()    {}
+func (*GetFileResp) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ab43d0115fee6550, []int{5}
+}
+
+func (m *GetFileResp) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_GetFileResp.Unmarshal(m, b)
+}
+func (m *GetFileResp) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_GetFileResp.Marshal(b, m, deterministic)
+}
+func (m *GetFileResp) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_GetFileResp.Merge(m, src)
+}
+func (m *GetFileResp) XXX_Size() int {
+	return xxx_messageInfo_GetFileResp.Size(m)
+}
+func (m *GetFileResp) XXX_DiscardUnknown() {
+	xxx_messageInfo_GetFileResp.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_GetFileResp proto.InternalMessageInfo
+
+func (m *GetFileResp) GetFile() []byte {
+	if m != nil {
+		return m.File
+	}
+	return nil
+}
+
+type CreateReq struct {
+	CreatedAt            string   `protobuf:"bytes,1,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
+	TotalChunks          int64    `protobuf:"varint,2,opt,name=total_chunks,json=totalChunks,proto3" json:"total_chunks,omitempty"`
+	UserId               int64    `protobuf:"varint,3,opt,name=user_id,json=userId,proto3" json:"user_id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *CreateReq) Reset()         { *m = CreateReq{} }
+func (m *CreateReq) String() string { return proto.CompactTextString(m) }
+func (*CreateReq) ProtoMessage()    {}
+func (*CreateReq) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ab43d0115fee6550, []int{6}
+}
+
+func (m *CreateReq) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CreateReq.Unmarshal(m, b)
+}
+func (m *CreateReq) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CreateReq.Marshal(b, m, deterministic)
+}
+func (m *CreateReq) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CreateReq.Merge(m, src)
+}
+func (m *CreateReq) XXX_Size() int {
+	return xxx_messageInfo_CreateReq.Size(m)
+}
+func (m *CreateReq) XXX_DiscardUnknown() {
+	xxx_messageInfo_CreateReq.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CreateReq proto.InternalMessageInfo
+
+func (m *CreateReq) GetCreatedAt() string {
+	if m != nil {
+		return m.CreatedAt
+	}
+	return ""
+}
+
+func (m *CreateReq) GetTotalChunks() int64 {
+	if m != nil {
+		return m.TotalChunks
+	}
+	return 0
+}
+
+func (m *CreateReq) GetUserId() int64 {
+	if m != nil {
+		return m.UserId
+	}
+	return 0
+}
+
+type CreateResp struct {
+	Id                   int64    `protobuf:"varint,1,opt,name=id,proto3" json:"id,omitempty"`
+	XXX_NoUnkeyedLiteral struct{} `json:"-"`
+	XXX_unrecognized     []byte   `json:"-"`
+	XXX_sizecache        int32    `json:"-"`
+}
+
+func (m *CreateResp) Reset()         { *m = CreateResp{} }
+func (m *CreateResp) String() string { return proto.CompactTextString(m) }
+func (*CreateResp) ProtoMessage()    {}
+func (*CreateResp) Descriptor() ([]byte, []int) {
+	return fileDescriptor_ab43d0115fee6550, []int{7}
+}
+
+func (m *CreateResp) XXX_Unmarshal(b []byte) error {
+	return xxx_messageInfo_CreateResp.Unmarshal(m, b)
+}
+func (m *CreateResp) XXX_Marshal(b []byte, deterministic bool) ([]byte, error) {
+	return xxx_messageInfo_CreateResp.Marshal(b, m, deterministic)
+}
+func (m *CreateResp) XXX_Merge(src proto.Message) {
+	xxx_messageInfo_CreateResp.Merge(m, src)
+}
+func (m *CreateResp) XXX_Size() int {
+	return xxx_messageInfo_CreateResp.Size(m)
+}
+func (m *CreateResp) XXX_DiscardUnknown() {
+	xxx_messageInfo_CreateResp.DiscardUnknown(m)
+}
+
+var xxx_messageInfo_CreateResp proto.InternalMessageInfo
+
+func (m *CreateResp) GetId() int64 {
+	if m != nil {
+		return m.Id
+	}
+	return 0
+}
+
 func init() {
-	proto.RegisterType((*StorePartlyReq)(nil), "filesys.storePartlyReq")
-	proto.RegisterType((*StorePartlyResp)(nil), "filesys.storePartlyResp")
+	proto.RegisterType((*StoreReq)(nil), "filesys.storeReq")
+	proto.RegisterType((*StoreResp)(nil), "filesys.storeResp")
+	proto.RegisterType((*GetFileInfoReq)(nil), "filesys.getFileInfoReq")
+	proto.RegisterType((*GetFileInfoResp)(nil), "filesys.getFileInfoResp")
+	proto.RegisterType((*GetFileReq)(nil), "filesys.getFileReq")
+	proto.RegisterType((*GetFileResp)(nil), "filesys.getFileResp")
+	proto.RegisterType((*CreateReq)(nil), "filesys.createReq")
+	proto.RegisterType((*CreateResp)(nil), "filesys.createResp")
 }
 
 func init() { proto.RegisterFile("filesys.proto", fileDescriptor_ab43d0115fee6550) }
 
 var fileDescriptor_ab43d0115fee6550 = []byte{
-	// 251 bytes of a gzipped FileDescriptorProto
-	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x6c, 0x90, 0x4f, 0x4b, 0xc3, 0x40,
-	0x10, 0xc5, 0x59, 0xdb, 0xa6, 0xcd, 0xd4, 0x3f, 0x30, 0x88, 0x5d, 0x0a, 0x62, 0xe8, 0x29, 0xa7,
-	0x1e, 0xf4, 0x0b, 0xa8, 0x87, 0x82, 0x78, 0x91, 0xf5, 0xe6, 0x25, 0xac, 0xdd, 0x2d, 0x59, 0xac,
-	0xc9, 0xba, 0xb3, 0x3d, 0xe4, 0x0b, 0xf9, 0x39, 0x25, 0x93, 0x54, 0x0c, 0x78, 0x7b, 0xbf, 0x19,
-	0x76, 0xde, 0xdb, 0x07, 0x67, 0x3b, 0xb7, 0xb7, 0xd4, 0xd0, 0xda, 0x87, 0x3a, 0xd6, 0x38, 0xed,
-	0x71, 0xf5, 0x2d, 0xe0, 0x9c, 0x62, 0x1d, 0xec, 0x8b, 0x0e, 0x71, 0xdf, 0x28, 0xfb, 0x85, 0x0b,
-	0x98, 0x1e, 0xc8, 0x86, 0xc2, 0x19, 0x29, 0x32, 0x91, 0x8f, 0x54, 0xd2, 0xe2, 0x93, 0xc1, 0x25,
-	0xcc, 0xda, 0x67, 0x95, 0xfe, 0xb4, 0xf2, 0x24, 0x13, 0x79, 0xaa, 0x7e, 0x19, 0xaf, 0x01, 0xb6,
-	0xc1, 0xea, 0x68, 0x4d, 0xa1, 0xa3, 0x1c, 0xf1, 0x36, 0xed, 0x27, 0x0f, 0x11, 0x11, 0xc6, 0x46,
-	0x47, 0x2d, 0xc7, 0x99, 0xc8, 0x4f, 0x15, 0x6b, 0xbc, 0x84, 0xc9, 0xb6, 0x3c, 0x54, 0x1f, 0x72,
-	0xc2, 0x2e, 0x1d, 0xe0, 0x15, 0x24, 0x2c, 0x48, 0x26, 0x9d, 0x79, 0x47, 0xab, 0x0d, 0x5c, 0x0c,
-	0x72, 0x92, 0x6f, 0x8f, 0x7a, 0x1d, 0x4b, 0x4e, 0x99, 0x2a, 0xd6, 0x78, 0x03, 0x73, 0x47, 0xc5,
-	0xce, 0x55, 0x8e, 0x4a, 0x6b, 0x38, 0xe6, 0x4c, 0x81, 0xa3, 0x4d, 0x3f, 0xb9, 0x7d, 0x06, 0xfe,
-	0xfb, 0x6b, 0x43, 0x78, 0x0f, 0xf3, 0x3f, 0x27, 0x71, 0xb1, 0x3e, 0x76, 0x34, 0x2c, 0x64, 0x29,
-	0xff, 0x5f, 0x90, 0x7f, 0x4c, 0xdf, 0x8e, 0x45, 0xbe, 0x27, 0x5c, 0xec, 0xdd, 0x4f, 0x00, 0x00,
-	0x00, 0xff, 0xff, 0xbc, 0x1f, 0xb4, 0x0f, 0x69, 0x01, 0x00, 0x00,
+	// 381 bytes of a gzipped FileDescriptorProto
+	0x1f, 0x8b, 0x08, 0x00, 0x00, 0x00, 0x00, 0x00, 0x02, 0xff, 0x8c, 0x53, 0x4d, 0x8b, 0xe2, 0x40,
+	0x10, 0x25, 0xf1, 0x33, 0xe5, 0xc7, 0xb2, 0xa5, 0x60, 0x90, 0x5d, 0x56, 0x1b, 0x16, 0x3c, 0x89,
+	0xeb, 0xc2, 0x9c, 0x9d, 0x0f, 0x04, 0xaf, 0x99, 0xdb, 0x5c, 0x42, 0xc6, 0x74, 0xc6, 0x66, 0x24,
+	0xe9, 0x49, 0xb7, 0x07, 0x7f, 0xcb, 0xfc, 0xc1, 0xf9, 0x19, 0x43, 0x2a, 0x9d, 0x0c, 0x46, 0xc1,
+	0xb9, 0x55, 0xbd, 0xbc, 0xaa, 0xbc, 0x57, 0x55, 0x0d, 0xbd, 0x48, 0xec, 0xb9, 0x3a, 0xaa, 0xb9,
+	0x4c, 0x13, 0x9d, 0x60, 0xcb, 0xa4, 0xec, 0x01, 0xda, 0x4a, 0x27, 0x29, 0xf7, 0xf8, 0x1b, 0xf6,
+	0xc1, 0x16, 0xa1, 0x6b, 0x4d, 0xac, 0x59, 0xcd, 0xb3, 0x45, 0x88, 0x43, 0x68, 0x6c, 0x77, 0x87,
+	0xf8, 0xd5, 0xb5, 0x09, 0xca, 0x13, 0x44, 0xa8, 0x87, 0x81, 0x0e, 0xdc, 0xda, 0xc4, 0x9a, 0x75,
+	0x3d, 0x8a, 0xd9, 0x0a, 0x1c, 0xd3, 0x45, 0xc9, 0x8c, 0x20, 0x03, 0xbd, 0xa3, 0x46, 0x8e, 0x47,
+	0x31, 0xfe, 0x81, 0x8e, 0x50, 0x7e, 0x24, 0x62, 0xa1, 0x76, 0x3c, 0xa4, 0x86, 0x6d, 0x0f, 0x84,
+	0x5a, 0x1b, 0x84, 0x4d, 0xa0, 0xff, 0xc2, 0xf5, 0x5a, 0xec, 0xf9, 0x26, 0x8e, 0x92, 0x0b, 0x6a,
+	0xd8, 0xbb, 0x05, 0x3f, 0x4e, 0x28, 0x4a, 0xe2, 0x6f, 0x80, 0x6d, 0xca, 0x03, 0xcd, 0x43, 0x3f,
+	0xd0, 0xe6, 0x87, 0x8e, 0x41, 0x6e, 0xf5, 0xd5, 0xbf, 0xe2, 0x14, 0xba, 0x3a, 0xd1, 0xc1, 0xde,
+	0x27, 0x6b, 0x8a, 0x3c, 0xd5, 0xbc, 0x0e, 0x61, 0xf7, 0x04, 0xe1, 0x5f, 0xe8, 0x6f, 0x0f, 0x69,
+	0xca, 0x63, 0x5d, 0x90, 0xea, 0x44, 0xea, 0x19, 0x34, 0xa7, 0xb1, 0x25, 0x80, 0x11, 0xf7, 0xed,
+	0x49, 0xb2, 0x29, 0x74, 0xca, 0x9a, 0x7c, 0x6e, 0xd9, 0x56, 0xa8, 0xac, 0xeb, 0x51, 0xcc, 0x22,
+	0x30, 0x76, 0xb2, 0xae, 0x57, 0xdc, 0x56, 0xcd, 0xd8, 0xe7, 0x66, 0x46, 0xd0, 0x3a, 0x28, 0x9e,
+	0xfa, 0x22, 0x34, 0x56, 0x9b, 0x59, 0xba, 0x09, 0xd9, 0xaf, 0xa2, 0x35, 0x29, 0xa9, 0xc8, 0x5f,
+	0x7e, 0x58, 0x40, 0x07, 0xf3, 0x78, 0x54, 0xb8, 0x80, 0x06, 0xad, 0x1a, 0x7f, 0xce, 0x8b, 0x93,
+	0x2a, 0x0e, 0x68, 0x8c, 0x55, 0x48, 0xc9, 0x99, 0x85, 0xab, 0xd2, 0x66, 0xb6, 0x37, 0x1c, 0x95,
+	0xa4, 0xd3, 0x85, 0x8f, 0xdd, 0xcb, 0x1f, 0x94, 0xc4, 0x1b, 0x68, 0x19, 0x08, 0x07, 0x55, 0x52,
+	0x56, 0x39, 0x3c, 0x07, 0x95, 0x5c, 0x58, 0xf8, 0x0f, 0x9a, 0xb9, 0x2b, 0xfc, 0x52, 0x56, 0x8e,
+	0x73, 0x3c, 0x38, 0xc3, 0x94, 0xbc, 0x73, 0x9e, 0x8a, 0xa7, 0xf1, 0xdc, 0xa4, 0xa7, 0xf2, 0xff,
+	0x33, 0x00, 0x00, 0xff, 0xff, 0x25, 0x84, 0x32, 0x92, 0x3b, 0x03, 0x00, 0x00,
 }
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -189,7 +461,10 @@ const _ = grpc.SupportPackageIsVersion4
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://godoc.org/google.golang.org/grpc#ClientConn.NewStream.
 type FileSysClient interface {
-	StorePartly(ctx context.Context, in *StorePartlyReq, opts ...grpc.CallOption) (*StorePartlyResp, error)
+	Store(ctx context.Context, opts ...grpc.CallOption) (FileSys_StoreClient, error)
+	GetFileInfo(ctx context.Context, in *GetFileInfoReq, opts ...grpc.CallOption) (*GetFileInfoResp, error)
+	GetFile(ctx context.Context, in *GetFileReq, opts ...grpc.CallOption) (FileSys_GetFileClient, error)
+	Create(ctx context.Context, in *CreateReq, opts ...grpc.CallOption) (*CreateResp, error)
 }
 
 type fileSysClient struct {
@@ -200,9 +475,84 @@ func NewFileSysClient(cc *grpc.ClientConn) FileSysClient {
 	return &fileSysClient{cc}
 }
 
-func (c *fileSysClient) StorePartly(ctx context.Context, in *StorePartlyReq, opts ...grpc.CallOption) (*StorePartlyResp, error) {
-	out := new(StorePartlyResp)
-	err := c.cc.Invoke(ctx, "/filesys.fileSys/storePartly", in, out, opts...)
+func (c *fileSysClient) Store(ctx context.Context, opts ...grpc.CallOption) (FileSys_StoreClient, error) {
+	stream, err := c.cc.NewStream(ctx, &_FileSys_serviceDesc.Streams[0], "/filesys.fileSys/store", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &fileSysStoreClient{stream}
+	return x, nil
+}
+
+type FileSys_StoreClient interface {
+	Send(*StoreReq) error
+	CloseAndRecv() (*StoreResp, error)
+	grpc.ClientStream
+}
+
+type fileSysStoreClient struct {
+	grpc.ClientStream
+}
+
+func (x *fileSysStoreClient) Send(m *StoreReq) error {
+	return x.ClientStream.SendMsg(m)
+}
+
+func (x *fileSysStoreClient) CloseAndRecv() (*StoreResp, error) {
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	m := new(StoreResp)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *fileSysClient) GetFileInfo(ctx context.Context, in *GetFileInfoReq, opts ...grpc.CallOption) (*GetFileInfoResp, error) {
+	out := new(GetFileInfoResp)
+	err := c.cc.Invoke(ctx, "/filesys.fileSys/getFileInfo", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *fileSysClient) GetFile(ctx context.Context, in *GetFileReq, opts ...grpc.CallOption) (FileSys_GetFileClient, error) {
+	stream, err := c.cc.NewStream(ctx, &_FileSys_serviceDesc.Streams[1], "/filesys.fileSys/getFile", opts...)
+	if err != nil {
+		return nil, err
+	}
+	x := &fileSysGetFileClient{stream}
+	if err := x.ClientStream.SendMsg(in); err != nil {
+		return nil, err
+	}
+	if err := x.ClientStream.CloseSend(); err != nil {
+		return nil, err
+	}
+	return x, nil
+}
+
+type FileSys_GetFileClient interface {
+	Recv() (*GetFileResp, error)
+	grpc.ClientStream
+}
+
+type fileSysGetFileClient struct {
+	grpc.ClientStream
+}
+
+func (x *fileSysGetFileClient) Recv() (*GetFileResp, error) {
+	m := new(GetFileResp)
+	if err := x.ClientStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func (c *fileSysClient) Create(ctx context.Context, in *CreateReq, opts ...grpc.CallOption) (*CreateResp, error) {
+	out := new(CreateResp)
+	err := c.cc.Invoke(ctx, "/filesys.fileSys/create", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -211,35 +561,112 @@ func (c *fileSysClient) StorePartly(ctx context.Context, in *StorePartlyReq, opt
 
 // FileSysServer is the server API for FileSys service.
 type FileSysServer interface {
-	StorePartly(context.Context, *StorePartlyReq) (*StorePartlyResp, error)
+	Store(FileSys_StoreServer) error
+	GetFileInfo(context.Context, *GetFileInfoReq) (*GetFileInfoResp, error)
+	GetFile(*GetFileReq, FileSys_GetFileServer) error
+	Create(context.Context, *CreateReq) (*CreateResp, error)
 }
 
 // UnimplementedFileSysServer can be embedded to have forward compatible implementations.
 type UnimplementedFileSysServer struct {
 }
 
-func (*UnimplementedFileSysServer) StorePartly(ctx context.Context, req *StorePartlyReq) (*StorePartlyResp, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method StorePartly not implemented")
+func (*UnimplementedFileSysServer) Store(srv FileSys_StoreServer) error {
+	return status.Errorf(codes.Unimplemented, "method Store not implemented")
+}
+func (*UnimplementedFileSysServer) GetFileInfo(ctx context.Context, req *GetFileInfoReq) (*GetFileInfoResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetFileInfo not implemented")
+}
+func (*UnimplementedFileSysServer) GetFile(req *GetFileReq, srv FileSys_GetFileServer) error {
+	return status.Errorf(codes.Unimplemented, "method GetFile not implemented")
+}
+func (*UnimplementedFileSysServer) Create(ctx context.Context, req *CreateReq) (*CreateResp, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Create not implemented")
 }
 
 func RegisterFileSysServer(s *grpc.Server, srv FileSysServer) {
 	s.RegisterService(&_FileSys_serviceDesc, srv)
 }
 
-func _FileSys_StorePartly_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-	in := new(StorePartlyReq)
+func _FileSys_Store_Handler(srv interface{}, stream grpc.ServerStream) error {
+	return srv.(FileSysServer).Store(&fileSysStoreServer{stream})
+}
+
+type FileSys_StoreServer interface {
+	SendAndClose(*StoreResp) error
+	Recv() (*StoreReq, error)
+	grpc.ServerStream
+}
+
+type fileSysStoreServer struct {
+	grpc.ServerStream
+}
+
+func (x *fileSysStoreServer) SendAndClose(m *StoreResp) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func (x *fileSysStoreServer) Recv() (*StoreReq, error) {
+	m := new(StoreReq)
+	if err := x.ServerStream.RecvMsg(m); err != nil {
+		return nil, err
+	}
+	return m, nil
+}
+
+func _FileSys_GetFileInfo_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(GetFileInfoReq)
 	if err := dec(in); err != nil {
 		return nil, err
 	}
 	if interceptor == nil {
-		return srv.(FileSysServer).StorePartly(ctx, in)
+		return srv.(FileSysServer).GetFileInfo(ctx, in)
 	}
 	info := &grpc.UnaryServerInfo{
 		Server:     srv,
-		FullMethod: "/filesys.fileSys/StorePartly",
+		FullMethod: "/filesys.fileSys/GetFileInfo",
 	}
 	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.(FileSysServer).StorePartly(ctx, req.(*StorePartlyReq))
+		return srv.(FileSysServer).GetFileInfo(ctx, req.(*GetFileInfoReq))
+	}
+	return interceptor(ctx, in, info, handler)
+}
+
+func _FileSys_GetFile_Handler(srv interface{}, stream grpc.ServerStream) error {
+	m := new(GetFileReq)
+	if err := stream.RecvMsg(m); err != nil {
+		return err
+	}
+	return srv.(FileSysServer).GetFile(m, &fileSysGetFileServer{stream})
+}
+
+type FileSys_GetFileServer interface {
+	Send(*GetFileResp) error
+	grpc.ServerStream
+}
+
+type fileSysGetFileServer struct {
+	grpc.ServerStream
+}
+
+func (x *fileSysGetFileServer) Send(m *GetFileResp) error {
+	return x.ServerStream.SendMsg(m)
+}
+
+func _FileSys_Create_Handler(srv interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+	in := new(CreateReq)
+	if err := dec(in); err != nil {
+		return nil, err
+	}
+	if interceptor == nil {
+		return srv.(FileSysServer).Create(ctx, in)
+	}
+	info := &grpc.UnaryServerInfo{
+		Server:     srv,
+		FullMethod: "/filesys.fileSys/Create",
+	}
+	handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.(FileSysServer).Create(ctx, req.(*CreateReq))
 	}
 	return interceptor(ctx, in, info, handler)
 }
@@ -249,10 +676,25 @@ var _FileSys_serviceDesc = grpc.ServiceDesc{
 	HandlerType: (*FileSysServer)(nil),
 	Methods: []grpc.MethodDesc{
 		{
-			MethodName: "storePartly",
-			Handler:    _FileSys_StorePartly_Handler,
+			MethodName: "getFileInfo",
+			Handler:    _FileSys_GetFileInfo_Handler,
+		},
+		{
+			MethodName: "create",
+			Handler:    _FileSys_Create_Handler,
 		},
 	},
-	Streams:  []grpc.StreamDesc{},
+	Streams: []grpc.StreamDesc{
+		{
+			StreamName:    "store",
+			Handler:       _FileSys_Store_Handler,
+			ClientStreams: true,
+		},
+		{
+			StreamName:    "getFile",
+			Handler:       _FileSys_GetFile_Handler,
+			ServerStreams: true,
+		},
+	},
 	Metadata: "filesys.proto",
 }

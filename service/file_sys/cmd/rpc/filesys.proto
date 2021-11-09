@@ -5,22 +5,49 @@ package filesys;
 option go_package = "filesys";
 
 service fileSys {
-  rpc storePartly (storePartlyReq) returns (storePartlyResp);
+  rpc store (stream storeReq) returns (storeResp);
+  rpc getFileInfo (getFileInfoReq) returns (getFileInfoResp);
+  rpc getFile (getFileReq) returns (stream getFileResp);
+  rpc create (createReq) returns (createResp);
 }
 
-message storePartlyReq {
-  int64 user_id = 1;
-  string filename = 2;
-  string created_at = 3;
-  bytes data = 4;
-  int64 chunk = 5;
-  int64 chunks = 6;
+message storeReq {
+  int64 id = 1;
+  int64 chunk = 2;
+  bytes data = 3;
 }
 
-message storePartlyResp {
+message storeResp {
   string path = 1;
   bool is_finished = 2;
 }
 
+message getFileInfoReq {
+  int64 id = 1;
+}
 
+message getFileInfoResp {
+  string created_at = 1;
+  bool is_finished = 2;
+  int64 total_chunks = 3;
+  int64 current_chunks = 4;
+}
 
+message getFileReq {
+  int64 id = 1;
+  int64 chunk = 2;
+}
+
+message getFileResp {
+  bytes file = 1;
+}
+
+message createReq {
+  string created_at = 1;
+  int64 total_chunks = 2;
+  int64 user_id = 3;
+}
+
+message createResp {
+  int64 id = 1;
+}

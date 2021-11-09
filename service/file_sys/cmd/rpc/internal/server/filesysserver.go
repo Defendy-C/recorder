@@ -21,7 +21,22 @@ func NewFileSysServer(svcCtx *svc.ServiceContext) *FileSysServer {
 	}
 }
 
-func (s *FileSysServer) StorePartly(ctx context.Context, in *filesys.StorePartlyReq) (*filesys.StorePartlyResp, error) {
-	l := logic.NewStorePartlyLogic(ctx, s.svcCtx)
-	return l.StorePartly(in)
+func (s *FileSysServer) Store(stream filesys.FileSys_StoreServer) error {
+	l := logic.NewStoreLogic(stream.Context(), s.svcCtx)
+	return l.Store(stream)
+}
+
+func (s *FileSysServer) GetFileInfo(ctx context.Context, in *filesys.GetFileInfoReq) (*filesys.GetFileInfoResp, error) {
+	l := logic.NewGetFileInfoLogic(ctx, s.svcCtx)
+	return l.GetFileInfo(in)
+}
+
+func (s *FileSysServer) GetFile(in *filesys.GetFileReq, stream filesys.FileSys_GetFileServer) error {
+	l := logic.NewGetFileLogic(stream.Context(), s.svcCtx)
+	return l.GetFile(in, stream)
+}
+
+func (s *FileSysServer) Create(ctx context.Context, in *filesys.CreateReq) (*filesys.CreateResp, error) {
+	l := logic.NewCreateLogic(ctx, s.svcCtx)
+	return l.Create(in)
 }

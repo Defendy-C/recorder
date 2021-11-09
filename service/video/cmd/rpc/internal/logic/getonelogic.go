@@ -26,23 +26,20 @@ func NewGetOneLogic(ctx context.Context, svcCtx *svc.ServiceContext) *GetOneLogi
 }
 
 func (l *GetOneLogic) GetOne(in *video.GetOneReq) (*video.GetOneResp, error) {
-	if validate.ValuesHasZero(in.UserId, in.Name) {
+	if validate.ValuesHasZero(in.Id) {
 		return nil, model.ErrValidate
 	}
 
-	v, err := l.svcCtx.VideoModel.FindOneByUserIdName(in.UserId, in.Name)
+	v, err := l.svcCtx.VideoModel.FindOne(in.Id)
 	if err != nil {
 		return nil, err
 	}
 
-	finishedAt := ""
-	if !v.FinishedAt.IsZero() {
-		finishedAt = v.FinishedAt.Format("2006-01-02 15:04:05")
-	}
-
 	return &video.GetOneResp{
-		Path:       v.Path,
-		CreatedAt:  v.CreatedAt.Format("2006-01-02 15:04:05"),
-		FinishedAt: finishedAt,
+		UserId:    v.UserId,
+		Name:      v.Title,
+		FileId:    v.FileId,
+		CreatedAt: validate.DateToString(&v.CreatedAt),
+		Desc:      v.Description,
 	}, nil
 }

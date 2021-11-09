@@ -13,11 +13,20 @@ import (
 )
 
 type (
-	StorePartlyReq  = filesys.StorePartlyReq
-	StorePartlyResp = filesys.StorePartlyResp
+	CreateReq       = filesys.CreateReq
+	CreateResp      = filesys.CreateResp
+	GetFileInfoReq  = filesys.GetFileInfoReq
+	GetFileInfoResp = filesys.GetFileInfoResp
+	GetFileReq      = filesys.GetFileReq
+	GetFileResp     = filesys.GetFileResp
+	StoreReq        = filesys.StoreReq
+	StoreResp       = filesys.StoreResp
 
 	FileSys interface {
-		StorePartly(ctx context.Context, in *StorePartlyReq, opts ...grpc.CallOption) (*StorePartlyResp, error)
+		Store(ctx context.Context, opts ...grpc.CallOption) (filesys.FileSys_StoreClient, error)
+		GetFileInfo(ctx context.Context, in *GetFileInfoReq, opts ...grpc.CallOption) (*GetFileInfoResp, error)
+		GetFile(ctx context.Context, in *GetFileReq, opts ...grpc.CallOption) (filesys.FileSys_GetFileClient, error)
+		Create(ctx context.Context, in *CreateReq, opts ...grpc.CallOption) (*CreateResp, error)
 	}
 
 	defaultFileSys struct {
@@ -31,7 +40,22 @@ func NewFileSys(cli zrpc.Client) FileSys {
 	}
 }
 
-func (m *defaultFileSys) StorePartly(ctx context.Context, in *StorePartlyReq, opts ...grpc.CallOption) (*StorePartlyResp, error) {
+func (m *defaultFileSys) Store(ctx context.Context, opts ...grpc.CallOption) (filesys.FileSys_StoreClient, error) {
 	client := filesys.NewFileSysClient(m.cli.Conn())
-	return client.StorePartly(ctx, in, opts...)
+	return client.Store(ctx, opts...)
+}
+
+func (m *defaultFileSys) GetFileInfo(ctx context.Context, in *GetFileInfoReq, opts ...grpc.CallOption) (*GetFileInfoResp, error) {
+	client := filesys.NewFileSysClient(m.cli.Conn())
+	return client.GetFileInfo(ctx, in, opts...)
+}
+
+func (m *defaultFileSys) GetFile(ctx context.Context, in *GetFileReq, opts ...grpc.CallOption) (filesys.FileSys_GetFileClient, error) {
+	client := filesys.NewFileSysClient(m.cli.Conn())
+	return client.GetFile(ctx, in, opts...)
+}
+
+func (m *defaultFileSys) Create(ctx context.Context, in *CreateReq, opts ...grpc.CallOption) (*CreateResp, error) {
+	client := filesys.NewFileSysClient(m.cli.Conn())
+	return client.Create(ctx, in, opts...)
 }

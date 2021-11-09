@@ -19,15 +19,15 @@ var (
 	videoRowsExpectAutoSet   = strings.Join(stringx.Remove(videoFieldNames, "`id`", "`create_time`", "`update_time`"), ",")
 	videoRowsWithPlaceHolder = strings.Join(stringx.Remove(videoFieldNames, "`id`", "`create_time`", "`update_time`"), "=?,") + "=?"
 
-	cacheVideoIdPrefix         = "cache:video:id:"
-	cacheVideoUserIdNamePrefix = "cache:video:userId:name:"
+	cacheVideoIdPrefix                   = "cache:video:id:"
+	cacheVideoUserIdCreatedAtTitlePrefix = "cache:video:userId:createdAt:title:"
 )
 
 type (
 	VideoModel interface {
 		Insert(data Video) (sql.Result, error)
 		FindOne(id int64) (*Video, error)
-		FindOneByUserIdName(userId int64, name string) (*Video, error)
+		FindOneByUserIdCreatedAtTitle(userId int64, createdAt time.Time, title string) (*Video, error)
 		Update(data Video) error
 		Delete(id int64) error
 	}
@@ -38,12 +38,12 @@ type (
 	}
 
 	Video struct {
-		Id         int64     `db:"id"`
-		Name       string    `db:"name"`        // 视频名
-		UserId     int64     `db:"user_id"`     // 用户Id
-		Path       string    `db:"path"`        // 存放路径
-		CreatedAt  time.Time `db:"created_at"`  // 创建时间
-		FinishedAt time.Time `db:"finished_at"` // 完成时间
+		Id          int64     `db:"id"`
+		Title       string    `db:"title"`       // 视频名
+		UserId      int64     `db:"user_id"`     // 用户Id
+		FileId      int64     `db:"file_id"`     // 文件Id
+		CreatedAt   time.Time `db:"created_at"`  // 创建时间
+		Description string    `db:"description"` // 描述
 	}
 )
 
@@ -55,11 +55,11 @@ func NewVideoModel(conn sqlx.SqlConn, c cache.CacheConf) VideoModel {
 }
 
 func (m *defaultVideoModel) Insert(data Video) (sql.Result, error) {
-	videoUserIdNameKey := fmt.Sprintf("%s%v:%v", cacheVideoUserIdNamePrefix, data.UserId, data.Name)
+	videoUserIdCreatedAtTitleKey := fmt.Sprintf("%s%v:%v:%v", cacheVideoUserIdCreatedAtTitlePrefix, data.UserId, data.CreatedAt, data.Title)
 	ret, err := m.Exec(func(conn sqlx.SqlConn) (result sql.Result, err error) {
 		query := fmt.Sprintf("insert into %s (%s) values (?, ?, ?, ?, ?)", m.table, videoRowsExpectAutoSet)
-		return conn.Exec(query, data.Name, data.UserId, data.Path, data.CreatedAt, data.FinishedAt)
-	}, videoUserIdNameKey)
+		return conn.Exec(query, data.Title, data.UserId, data.FileId, data.CreatedAt, data.Description)
+	}, videoUserIdCreatedAtTitleKey)
 	return ret, err
 }
 
@@ -80,12 +80,12 @@ func (m *defaultVideoModel) FindOne(id int64) (*Video, error) {
 	}
 }
 
-func (m *defaultVideoModel) FindOneByUserIdName(userId int64, name string) (*Video, error) {
-	videoUserIdNameKey := fmt.Sprintf("%s%v:%v", cacheVideoUserIdNamePrefix, userId, name)
+func (m *defaultVideoModel) FindOneByUserIdCreatedAtTitle(userId int64, createdAt time.Time, title string) (*Video, error) {
+	videoUserIdCreatedAtTitleKey := fmt.Sprintf("%s%v:%v:%v", cacheVideoUserIdCreatedAtTitlePrefix, userId, createdAt, title)
 	var resp Video
-	err := m.QueryRowIndex(&resp, videoUserIdNameKey, m.formatPrimary, func(conn sqlx.SqlConn, v interface{}) (i interface{}, e error) {
-		query := fmt.Sprintf("select %s from %s where `user_id` = ? and `name` = ? limit 1", videoRows, m.table)
-		if err := conn.QueryRow(&resp, query, userId, name); err != nil {
+	err := m.QueryRowIndex(&resp, videoUserIdCreatedAtTitleKey, m.formatPrimary, func(conn sqlx.SqlConn, v interface{}) (i interface{}, e error) {
+		query := fmt.Sprintf("select %s from %s where `user_id` = ? and `created_at` = ? and `title` = ? limit 1", videoRows, m.table)
+		if err := conn.QueryRow(&resp, query, userId, createdAt, title); err != nil {
 			return nil, err
 		}
 		return resp.Id, nil
@@ -101,12 +101,12 @@ func (m *defaultVideoModel) FindOneByUserIdName(userId int64, name string) (*Vid
 }
 
 func (m *defaultVideoModel) Update(data Video) error {
-	videoUserIdNameKey := fmt.Sprintf("%s%v:%v", cacheVideoUserIdNamePrefix, data.UserId, data.Name)
 	videoIdKey := fmt.Sprintf("%s%v", cacheVideoIdPrefix, data.Id)
+	videoUserIdCreatedAtTitleKey := fmt.Sprintf("%s%v:%v:%v", cacheVideoUserIdCreatedAtTitlePrefix, data.UserId, data.CreatedAt, data.Title)
 	_, err := m.Exec(func(conn sqlx.SqlConn) (result sql.Result, err error) {
 		query := fmt.Sprintf("update %s set %s where `id` = ?", m.table, videoRowsWithPlaceHolder)
-		return conn.Exec(query, data.Name, data.UserId, data.Path, data.CreatedAt, data.FinishedAt, data.Id)
-	}, videoIdKey, videoUserIdNameKey)
+		return conn.Exec(query, data.Title, data.UserId, data.FileId, data.CreatedAt, data.Description, data.Id)
+	}, videoIdKey, videoUserIdCreatedAtTitleKey)
 	return err
 }
 
@@ -116,12 +116,12 @@ func (m *defaultVideoModel) Delete(id int64) error {
 		return err
 	}
 
+	videoUserIdCreatedAtTitleKey := fmt.Sprintf("%s%v:%v:%v", cacheVideoUserIdCreatedAtTitlePrefix, data.UserId, data.CreatedAt, data.Title)
 	videoIdKey := fmt.Sprintf("%s%v", cacheVideoIdPrefix, id)
-	videoUserIdNameKey := fmt.Sprintf("%s%v:%v", cacheVideoUserIdNamePrefix, data.UserId, data.Name)
 	_, err = m.Exec(func(conn sqlx.SqlConn) (result sql.Result, err error) {
 		query := fmt.Sprintf("delete from %s where `id` = ?", m.table)
 		return conn.Exec(query, id)
-	}, videoIdKey, videoUserIdNameKey)
+	}, videoIdKey, videoUserIdCreatedAtTitleKey)
 	return err
 }
 

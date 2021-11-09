@@ -1,7 +1,7 @@
 Name: user
-ListenOn: 127.0.0.1:8080
+ListenOn: 127.0.0.1:8081
 Mysql:
-  Datasource: root:$password@tcp(127.0.0.1:3306)/recorder?charset=utf8mb4&parseTime=true
+  Datasource: root:cdw8922323@tcp(127.0.0.1:3306)/recorder?charset=utf8mb4&parseTime=true
 Cache:
   - Host: 127.0.0.1:6379
     Type: node

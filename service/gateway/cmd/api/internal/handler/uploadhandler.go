@@ -18,18 +18,8 @@ func uploadHandler(ctx *svc.ServiceContext) http.HandlerFunc {
 		}
 
 		l := logic.NewUploadLogic(r.Context(), ctx)
-		f, _, err := r.FormFile("data")
-		if err != nil {
-			httpx.Error(w, err)
-		}
 
-		var data []byte
-		_, err = f.Read(data)
-		if err != nil {
-			httpx.Error(w, err)
-		}
-
-		resp, err := l.Upload(req, data)
+		resp, err := l.Upload(req, r.Body)
 		if err != nil {
 			httpx.Error(w, err)
 		} else {

@@ -34,7 +34,7 @@ func (l *GetVideoListLogic) GetVideoList(in *video.GetVideoListReq) (*video.GetV
 
 	opt := model.NewListOption(in.Page, in.PageSize)
 	// get data
-	vs, err := l.svcCtx.VideoModel.FindManyByUserIdCreatedAt(in.UserId, createdAt, opt)
+	vs, err := l.svcCtx.VideoModel.FindVideosByUserIdCreatedAt(in.UserId, createdAt, opt)
 	if err != nil {
 		return nil, err
 	}
@@ -43,8 +43,10 @@ func (l *GetVideoListLogic) GetVideoList(in *video.GetVideoListReq) (*video.GetV
 	list := make([]*video.GetVideoListRespVideoItem, len(vs))
 	for i, v := range vs {
 		list[i] = &video.GetVideoListRespVideoItem{
-			Id: v.Id,
-			Name: v.Name,
+			Id:        v.Id,
+			Name:      v.Title,
+			CreatedAt: validate.DateToString(&v.CreatedAt),
+			Desc:      v.Description,
 		}
 	}
 

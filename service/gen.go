@@ -14,3 +14,6 @@ package service
 
 // file_sys rpc
 //go:generate goctl rpc proto -src file_sys/cmd/rpc/filesys.proto -dir file_sys/cmd/rpc/
+
+// file_sys model
+//go:generate goctl model mysql ddl -c -src file_sys/model/filesys.sql -dir file_sys/model/

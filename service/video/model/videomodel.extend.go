@@ -9,7 +9,7 @@ import (
 
 type RealVideoModel interface {
 	VideoModel
-	FindManyByUserIdCreatedAt(userId int64, createdAt time.Time, paging *ListOption) ([]*Video, error)
+	FindVideosByUserIdCreatedAt(userId int64, createdAt time.Time, opt *ListOption) ([]*Video, error)
 }
 
 type ListOption struct {
@@ -43,7 +43,6 @@ func NewRealVideoModel(conn sqlx.SqlConn, c cache.CacheConf) RealVideoModel {
 	}
 }
 
-func (m *defaultVideoModel) FindManyByUserIdCreatedAt(userId int64, createdAt time.Time, paging *ListOption) ([]*Video, error) {
-	// todo
+func (m *defaultVideoModel) FindVideosByUserIdCreatedAt(userId int64, createdAt time.Time, opt *ListOption) ([]*Video, error) {
 	panic("implement me")
 }

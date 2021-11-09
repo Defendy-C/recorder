@@ -13,6 +13,8 @@ import (
 )
 
 type (
+	CreateReq                 = video.CreateReq
+	CreateResp                = video.CreateResp
 	DeleteReq                 = video.DeleteReq
 	DeleteResp                = video.DeleteResp
 	GetOneReq                 = video.GetOneReq
@@ -20,14 +22,9 @@ type (
 	GetVideoListReq           = video.GetVideoListReq
 	GetVideoListResp          = video.GetVideoListResp
 	GetVideoListRespVideoItem = video.GetVideoListRespVideoItem
-	UploadedReq               = video.UploadedReq
-	UploadedResp              = video.UploadedResp
-	UploadingReq              = video.UploadingReq
-	UploadingResp             = video.UploadingResp
 
 	Video interface {
-		Uploading(ctx context.Context, in *UploadingReq, opts ...grpc.CallOption) (*UploadingResp, error)
-		Uploaded(ctx context.Context, in *UploadedReq, opts ...grpc.CallOption) (*UploadedResp, error)
+		Create(ctx context.Context, in *CreateReq, opts ...grpc.CallOption) (*CreateResp, error)
 		GetVideoList(ctx context.Context, in *GetVideoListReq, opts ...grpc.CallOption) (*GetVideoListResp, error)
 		GetOne(ctx context.Context, in *GetOneReq, opts ...grpc.CallOption) (*GetOneResp, error)
 		Delete(ctx context.Context, in *DeleteReq, opts ...grpc.CallOption) (*DeleteResp, error)
@@ -44,14 +41,9 @@ func NewVideo(cli zrpc.Client) Video {
 	}
 }
 
-func (m *defaultVideo) Uploading(ctx context.Context, in *UploadingReq, opts ...grpc.CallOption) (*UploadingResp, error) {
+func (m *defaultVideo) Create(ctx context.Context, in *CreateReq, opts ...grpc.CallOption) (*CreateResp, error) {
 	client := video.NewVideoClient(m.cli.Conn())
-	return client.Uploading(ctx, in, opts...)
-}
-
-func (m *defaultVideo) Uploaded(ctx context.Context, in *UploadedReq, opts ...grpc.CallOption) (*UploadedResp, error) {
-	client := video.NewVideoClient(m.cli.Conn())
-	return client.Uploaded(ctx, in, opts...)
+	return client.Create(ctx, in, opts...)
 }
 
 func (m *defaultVideo) GetVideoList(ctx context.Context, in *GetVideoListReq, opts ...grpc.CallOption) (*GetVideoListResp, error) {
