@@ -2,7 +2,6 @@ package logic
 
 import (
 	"context"
-	"fmt"
 	"os"
 	"recorder/service/file_sys/cmd/rpc/filesys"
 	"recorder/service/file_sys/cmd/rpc/internal/svc"
@@ -50,8 +49,6 @@ func (l *CreateLogic) Create(in *filesys.CreateReq) (*filesys.CreateResp, error)
 	if err != nil {
 		return nil, err
 	}
-	fmt.Println(storageSpace + path)
-	fmt.Println(os.Getwd())
 
 	res, err := l.svcCtx.FileSysModel.Insert(model.FileSys{
 		Path: path,

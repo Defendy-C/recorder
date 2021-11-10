@@ -445,7 +445,7 @@ type GetOneResp struct {
 	Name                 string   `protobuf:"bytes,2,opt,name=name,proto3" json:"name,omitempty"`
 	CreatedAt            string   `protobuf:"bytes,3,opt,name=created_at,json=createdAt,proto3" json:"created_at,omitempty"`
 	Desc                 string   `protobuf:"bytes,4,opt,name=desc,proto3" json:"desc,omitempty"`
-	FileId               int64    `protobuf:"varint,5.png,opt,name=file_id,json=fileId,proto3" json:"file_id,omitempty"`
+	FileId               int64    `protobuf:"varint,5,opt,name=file_id,json=fileId,proto3" json:"file_id,omitempty"`
 	XXX_NoUnkeyedLiteral struct{} `json:"-"`
 	XXX_unrecognized     []byte   `json:"-"`
 	XXX_sizecache        int32    `json:"-"`

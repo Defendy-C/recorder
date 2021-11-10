@@ -19,4 +19,5 @@ FileSysRpc:
     Hosts:
     - 127.0.0.1:2379
     Key: filesys.rpc
-  Timeout: 10000
+  Timeout: 20000
+Timeout: 10000

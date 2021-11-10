@@ -1,7 +1,6 @@
 package svc
 
 import (
-	"fmt"
 	"github.com/tal-tech/go-zero/zrpc"
 	"recorder/service/file_sys/cmd/rpc/filesysclient"
 	"recorder/service/gateway/cmd/api/internal/config"
@@ -17,7 +16,6 @@ type ServiceContext struct {
 }
 
 func NewServiceContext(c config.Config) *ServiceContext {
-	fmt.Println("-----------", c.FileSysRpc.Timeout)
 	return &ServiceContext{
 		UserClient:    userclient.NewUser(zrpc.MustNewClient(c.UserRpc)),
 		VideoClient:   videoclient.NewVideo(zrpc.MustNewClient(c.VideoRpc)),

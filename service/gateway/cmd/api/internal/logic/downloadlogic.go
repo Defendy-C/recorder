@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"context"
 	"io"
-	"net/http"
+	"net/http/httputil"
 	"recorder/service/file_sys/cmd/rpc/filesys"
 	"recorder/service/gateway/httperror"
 	"recorder/service/video/cmd/rpc/video"
@@ -52,18 +52,18 @@ func (l *DownloadLogic) Download(req types.DownloadReq, w io.Writer) error {
 		return httperror.ErrVideoDownloadFailed
 	}
 
-	for resp, err := client.Recv(); err == nil; resp, err = client.Recv() {
-		_, err = io.Copy(w, bytes.NewReader(resp.File))
+	var resp *filesys.GetFileResp
+	// 分块发送, 避免占用内存
+	nw := httputil.NewChunkedWriter(w)
+	for resp, err = client.Recv(); err == nil; resp, err = client.Recv() {
+		_, err = io.Copy(nw, bytes.NewReader(resp.File))
 		if err != nil {
 			l.Logger.Infof("file videoId-chunk %d-%d download failed: %v\n", req.Id, req.Chunk, err)
 			return httperror.ErrVideoDownloadFailed
 		}
-
-		// 分块发送, 避免占用内存
-		w.(http.Flusher).Flush()
 	}
-
 	switch err {
+	case nil:
 	case io.EOF:
 	default:
 		l.Logger.Infof("file videoId-chunk %d-%d download failed: %v\n", req.Id, req.Chunk, err)

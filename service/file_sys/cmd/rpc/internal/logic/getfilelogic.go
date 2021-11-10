@@ -33,7 +33,7 @@ func (l *GetFileLogic) GetFile(in *filesys.GetFileReq, stream filesys.FileSys_Ge
 		return err
 	}
 
-	f, err := os.Open(one.Path + strconv.Itoa(int(in.Chunk)))
+	f, err := os.Open(storageSpace + one.Path + "\\" + strconv.Itoa(int(in.Chunk)))
 	if err != nil {
 		return err
 	}
@@ -46,10 +46,11 @@ func (l *GetFileLogic) GetFile(in *filesys.GetFileReq, stream filesys.FileSys_Ge
 	}(f)
 
 	r := bufio.NewReader(f)
-	buf := make([]byte, 1024 * 1024)
-	for _, err = r.Read(buf); err == nil; _, err = r.Read(buf) {
+	buf := make([]byte, 1 * 1024)
+	n := 0
+	for n, err = r.Read(buf); err == nil; n, err = r.Read(buf) {
 		err = stream.Send(&filesys.GetFileResp{
-			File: buf,
+			File: buf[0:n],
 		})
 		if err != nil {
 			return err

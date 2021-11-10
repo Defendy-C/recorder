@@ -3,7 +3,6 @@ package logic
 import (
 	"bufio"
 	"context"
-	"fmt"
 	"io"
 	"io/ioutil"
 	"os"
@@ -35,11 +34,13 @@ func (l *StoreLogic) Store(stream filesys.FileSys_StoreServer) error {
 	if err != nil {
 		return err
 	}
+
 	// id 校验
 	obj, err := l.svcCtx.FileSysModel.FindOne(req.Id)
 	if err != nil {
 		return err
 	}
+
 	res := obj.Path
 	// 文件检查
 	filename := obj.Path + "\\" + strconv.Itoa(int(req.Chunk))
@@ -58,7 +59,6 @@ func (l *StoreLogic) Store(stream filesys.FileSys_StoreServer) error {
 		isFinished = true
 	}
 	// 打开文件
-	fmt.Println(os.Getwd())
 	f, err := os.OpenFile(storageSpace + filename, os.O_WRONLY | os.O_APPEND | os.O_CREATE, 0777)
 	if err != nil {
 		return err
@@ -73,10 +73,8 @@ func (l *StoreLogic) Store(stream filesys.FileSys_StoreServer) error {
 	// 数据接收
 	buf := bufio.NewWriter(f)
 	for req, err = stream.Recv();err == nil; req, err = stream.Recv() {
-		fmt.Println(8)
 		_, err = buf.Write(req.Data)
 		if err != nil {
-			fmt.Println("ww---------------")
 			break
 		}
 

@@ -2,7 +2,6 @@ package logic
 
 import (
 	"context"
-	"fmt"
 	"github.com/tal-tech/go-zero/core/logx"
 	"io"
 	"recorder/service/file_sys/cmd/rpc/filesysclient"
@@ -59,10 +58,7 @@ func (l *UploadLogic) Upload(req types.UploadReq, rd io.ReadCloser) (*types.Uplo
 	}
 
 	buf := make([]byte, 1 * 1024)
-	c := 0
 	for n, err := rd.Read(buf);err == nil;n, err = rd.Read(buf) {
-		c++
-		fmt.Println(c, n)
 		if n == 0 {
 			break
 		}
